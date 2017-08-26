@@ -9,13 +9,13 @@ package project.edd1;
  *
  * @author arles96
  */
-public class ProjectEDD1 {
+/*public class ProjectEDD1 {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // TODO code application logic here
-    }
+    /*}
     
-}
+}*/
