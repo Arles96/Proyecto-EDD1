@@ -31,6 +31,13 @@ public class MainMenu extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         TitleLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         BackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,6 +51,27 @@ public class MainMenu extends javax.swing.JFrame {
         TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TitleLabel.setText("MENU PRINCIPAL");
         mainPanel.add(TitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1180, 80));
+
+        jButton1.setText("jButton1");
+        mainPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, 230, 80));
+
+        jButton2.setText("jButton1");
+        mainPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 230, 80));
+
+        jButton3.setText("Calculo de Desempeño");
+        mainPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 230, 80));
+
+        jButton4.setText("jButton1");
+        mainPanel.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 230, 80));
+
+        jButton5.setText("jButton1");
+        mainPanel.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 230, 80));
+
+        jButton6.setText("jButton1");
+        mainPanel.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 530, 230, 80));
+
+        jButton7.setText("jButton1");
+        mainPanel.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 260, 230, 80));
 
         BackgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project/edd1/img/matrix-1799661_1920.jpg"))); // NOI18N
         mainPanel.add(BackgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 640));
@@ -98,6 +126,13 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackgroundLabel;
     private javax.swing.JLabel TitleLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

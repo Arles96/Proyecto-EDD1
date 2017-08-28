@@ -87,8 +87,24 @@ public class Tree {
         }
     }
     
-    public Employee find(){
-        return null;
+    public boolean isLeaf(){
+        return counter==0;
+    }
+    
+    
+    public void grades(){
+        if (!isLeaf()) {
+            int accumulator = 0;
+            for (int i = 0; i < counter; i++) {
+                if (tree[i].isLeaf()) {
+                    accumulator += tree[i].getRooth().getValue();
+                }else{
+                    tree[i].grades();
+                    accumulator += tree[i].getRooth().getValue();
+                }                
+            }
+            rooth.setValue(accumulator/counter);
+        }
     }
     
 }
