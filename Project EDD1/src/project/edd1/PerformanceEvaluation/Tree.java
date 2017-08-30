@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.edd1.EvaluacionDesempeño;
+package project.edd1.PerformanceEvaluation;
 
 import javax.swing.JOptionPane;
 
@@ -23,6 +23,12 @@ public class Tree {
     public Tree(Employee rooth, int limit) {
         this.rooth = rooth;
         this.limit = limit;
+        this.tree = new Tree[this.limit];
+    }
+    
+    public Tree(Employee rooth){
+        this.rooth = rooth;
+        limit = 30;
         this.tree = new Tree[this.limit];
     }
     
@@ -56,13 +62,25 @@ public class Tree {
     //Administration methods
     
     public void insert(Employee person){
-        if (counter<limit) {
-            tree[counter]= new Tree(person, limit);
+        if (rooth==null) {
+            rooth = person;
+        }else if (rooth!=null && counter<limit) {
+            Tree child = new Tree(person, limit);
+            tree[counter] = child;
             counter++;
         }else {
-            JOptionPane.showMessageDialog(null, "Error: El numero de empleados esta a limite.");
+            JOptionPane.showMessageDialog(null, "Error: Memoria llena.");
         }
-    }  
+    } 
+    
+    public void insert_child(Employee person, int id){
+        for (int i = 0; i < counter; i++) {
+            if (tree[i].getRooth().getId()==id) {
+                tree[i].insert(person);
+                break;
+            }
+        }
+    }
     
     public boolean isEmpty(){
         return rooth==null && counter==0;

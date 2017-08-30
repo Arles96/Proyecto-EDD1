@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.edd1.EvaluacionDesempeño;
+package project.edd1.PerformanceEvaluation;
 
 import java.util.Objects;
 
@@ -17,13 +17,18 @@ public class Employee {
 
     private int value;
     private String name;
+    private String area;
+    private int id;
     
     //constructor
 
-    public Employee(int value, String name) {
+    public Employee(int value, String name, String area, int id) {
         this.value = value;
-        this.name= name;
+        this.name = name;
+        this.area = area;
+        this.id = id;
     }
+
     
     //getter and setter
 
@@ -35,14 +40,30 @@ public class Employee {
         this.value = value;
     }
 
-    public String getDepartment() {
+    public String getName() {
         return name;
     }
 
-    public void setDepartment(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     // administration methods
 
     @Override
