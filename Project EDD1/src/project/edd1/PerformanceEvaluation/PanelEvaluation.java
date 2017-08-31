@@ -5,6 +5,7 @@
  */
 package project.edd1.PerformanceEvaluation;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +22,6 @@ public class PanelEvaluation extends javax.swing.JPanel {
     }
     
     private Tree tree;
-    private int limit;
     
 
     /**
@@ -51,11 +51,6 @@ public class PanelEvaluation extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         treeTextArea = new javax.swing.JTextArea();
 
-        EmployeeList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(EmployeeList);
 
         tittleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -215,6 +210,10 @@ public class PanelEvaluation extends javax.swing.JPanel {
         if (tree==null) {
             tree = new Tree(new Employee(value, name, area, id));
             JOptionPane.showMessageDialog(this, "Se ha agregado un Empleado.");
+            DefaultListModel model = new DefaultListModel();
+            model.addElement(tree.getRooth());
+            treeTextArea.setText(">"+tree.getRooth().toString());
+            EmployeeList.setModel(model);
         }
         
     }//GEN-LAST:event_addEmployeeActionPerformed

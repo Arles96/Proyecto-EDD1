@@ -5,6 +5,7 @@
  */
 package project.edd1.PerformanceEvaluation;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,22 +15,12 @@ import javax.swing.JOptionPane;
 public class Tree {
     
     private Employee rooth;
-    private int limit = 0;
-    private Tree[] tree;
-    private  int counter = 0;
+    private ArrayList <Tree> tree = new ArrayList();
     
     //constructor
 
-    public Tree(Employee rooth, int limit) {
+    public Tree(Employee rooth) {
         this.rooth = rooth;
-        this.limit = limit;
-        this.tree = new Tree[this.limit];
-    }
-    
-    public Tree(Employee rooth){
-        this.rooth = rooth;
-        limit = 30;
-        this.tree = new Tree[this.limit];
     }
     
     // getter and setter
@@ -42,87 +33,72 @@ public class Tree {
         this.rooth = rooth;
     }
 
-    public int getLimit() {
-        return limit;
-    }
-
-    public Tree[] getTree() {
+    public ArrayList<Tree> getTree() {
         return tree;
     }
 
-    public void setTree(Tree[] tree) {
+    public void setTree(ArrayList<Tree> tree) {
         this.tree = tree;
     }
-
-    public int getCounter() {
-        return counter;
-    }
-    
     
     //Administration methods
     
-    public void insert(Employee person){
-        if (rooth==null) {
-            rooth = person;
-        }else if (rooth!=null && counter<limit) {
-            Tree child = new Tree(person, limit);
-            tree[counter] = child;
-            counter++;
+    public void insert(Employee person, int id){
+        if (rooth.getId()==id) {
+            tree.add(new Tree(person));
         }else {
-            JOptionPane.showMessageDialog(null, "Error: Memoria llena.");
-        }
-    } 
-    
-    public void insert_child(Employee person, int id){
-        for (int i = 0; i < counter; i++) {
-            if (tree[i].getRooth().getId()==id) {
-                tree[i].insert(person);
-                break;
-            }
-        }
-    }
-    
-    public boolean isEmpty(){
-        return rooth==null && counter==0;
-    }
-    
-    public void clear(){
-        rooth = null;
-        counter = 0;
-    }
-    
-    public void remove(Employee employee){
-        if (isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El arbol esta vacio.");
-        }else {
-            if (rooth.equals(employee)) {
-                rooth = null;
-            }else {
-                for (int i = 0; i < counter; i++) {
-                    remove(tree[counter].getRooth());
+            for (Tree t : tree) {
+                if (t.getRooth().getId()==id) {
+                    t.getTree().add(new Tree(person));
+                    break;
                 }
             }
         }
     }
     
+    public boolean isEmpty(){
+        return rooth == null;
+    }
+    
+    public void clear(){
+        rooth = null;
+        tree.clear();
+    }
+    
+    public void remove(int id){
+        for (Tree t : tree) {
+            if (t.getRooth().getId()==id) {
+                tree.remove(t);
+                break;
+            }
+        }
+    }
+    
     public boolean isLeaf(){
-        return counter==0;
+        return tree.size()==-1;
     }
     
     
     public void grades(){
         if (!isLeaf()) {
             int accumulator = 0;
-            for (int i = 0; i < counter; i++) {
-                if (tree[i].isLeaf()) {
-                    accumulator += tree[i].getRooth().getValue();
-                }else{
-                    tree[i].grades();
-                    accumulator += tree[i].getRooth().getValue();
-                }                
+            for (Tree t : tree) {
+                if (t.isLeaf()) {
+                    accumulator+=t.getRooth().getValue();
+                }else {
+                    t.grades();
+                    accumulator += t.getRooth().getGrade();
+                }
             }
-            rooth.setValue(accumulator/counter);
+            rooth.setGrade(accumulator);
         }
+    }
+    
+    public boolean isExists(int id){
+        if (rooth.getId()==id) {
+            return true;
+        }
+        else return tree.stream().anyMatch((t) -> (t.getRooth().getId()==id));        
     }
     
 }

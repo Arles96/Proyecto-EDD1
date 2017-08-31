@@ -15,6 +15,7 @@ public class Employee {
     
     //atribute
 
+    private int grade;
     private int value;
     private String name;
     private String area;
@@ -24,6 +25,7 @@ public class Employee {
 
     public Employee(int value, String name, String area, int id) {
         this.value = value;
+        this.grade = value;
         this.name = name;
         this.area = area;
         this.id = id;
@@ -62,6 +64,14 @@ public class Employee {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
     
     // administration methods
