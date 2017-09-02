@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.edd1.PerformanceEvaluation;
+package PerformanceEvaluation;
 
 import java.util.Objects;
 
@@ -97,15 +97,12 @@ public class Employee {
         if (this.value != other.value) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.name, other.name);
     }
 
     @Override
     public String toString() {
-        return "Empleado: " + this.name + "Nota: " + value;
+        return name + "_" + id;
     }
         
 }

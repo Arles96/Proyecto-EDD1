@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.edd1;
+package project;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import project.edd1.PerformanceEvaluation.PanelEvaluation;
+import PerformanceEvaluation.PanelEvaluation;
 
 /**
  *
@@ -15,14 +15,26 @@ import project.edd1.PerformanceEvaluation.PanelEvaluation;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainMenu
-     */
+    
+    //Constructor
+    
     public MainMenu() {
         initComponents();
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
+        configurations();
     }
+    
+    //Atributes
+    
+    
+    private PanelEvaluation panel;
+    
+    // administration method
+    
+    private void configurations(){
+        setResizable(false);
+        setLocationRelativeTo(null);
+    }
+    
     
     public void addPanel(JPanel panel){
         panel.setSize(this.getWidth(), this.getHeight());
@@ -53,6 +65,9 @@ public class MainMenu extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         performanceEvaluationButton = new javax.swing.JButton();
         backgroundLabel = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,19 +104,27 @@ public class MainMenu extends javax.swing.JFrame {
         });
         mainPanel.add(performanceEvaluationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 200, 40));
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project/edd1/img/background.png"))); // NOI18N
-        mainPanel.add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1296, -1));
+        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/background.png"))); // NOI18N
+        mainPanel.add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1260, -1));
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1261, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,7 +142,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void performanceEvaluationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performanceEvaluationButtonActionPerformed
         // TODO add your handling code here:
-        PanelEvaluation panel = new PanelEvaluation();
+        panel = new PanelEvaluation();
         addPanel(panel);
     }//GEN-LAST:event_performanceEvaluationButtonActionPerformed
 
@@ -134,7 +157,7 @@ public class MainMenu extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -166,6 +189,9 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton performanceEvaluationButton;
     // End of variables declaration//GEN-END:variables
