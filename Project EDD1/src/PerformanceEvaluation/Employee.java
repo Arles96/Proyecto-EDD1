@@ -71,7 +71,11 @@ public class Employee {
     }
 
     public void setGrade(int grade) {
-        this.grade = grade;
+        if (grade!=0) {
+            this.grade = grade;
+        }else {
+            this.grade = this.value;
+        }        
     }
     
     // administration methods
@@ -104,5 +108,5 @@ public class Employee {
     public String toString() {
         return name + "_" + id;
     }
-        
+            
 }

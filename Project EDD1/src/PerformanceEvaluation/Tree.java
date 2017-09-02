@@ -7,6 +7,8 @@ package PerformanceEvaluation;
 
 import abstractClass.AbastractTree;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -162,4 +164,37 @@ public class Tree extends AbastractTree{
             JOptionPane.showMessageDialog(null, "Error al agregar");
         }
     }
+    
+    public void changeEmployee(String name, String area, int value, int id, Employee employee){
+        if (rooth.equals(employee)) {
+            if (!name.equals(rooth.getName())) {
+                rooth.setName(name);
+                employee.setName(name);
+                JOptionPane.showMessageDialog(null, "Se ha modificado el nombre.");
+            }
+            if (!area.equals(rooth.getArea())) {
+                rooth.setArea(area);
+                employee.setArea(area);
+                JOptionPane.showMessageDialog(null, "Se ha modificado el area.");
+            }
+            if (id!=rooth.getId()) {
+                rooth.setId(id);
+                employee.setId(id);
+                JOptionPane.showMessageDialog(null, "Se ha modificado el id.");
+            }
+            if (isLeaf()) {
+                if (value!=rooth.getValue()) {
+                    rooth.setValue(value);
+                    employee.setValue(value);
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+        }else {
+            tree.forEach((t) -> {
+                t.changeEmployee(name, area, value, id, employee);
+            });
+        }
+    }
+    
 }

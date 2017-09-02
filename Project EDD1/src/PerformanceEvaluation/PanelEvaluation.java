@@ -5,7 +5,6 @@
  */
 package PerformanceEvaluation;
 
-import java.awt.HeadlessException;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -229,6 +228,11 @@ public class PanelEvaluation extends javax.swing.JPanel {
         });
 
         changeButton.setText("Modificar");
+        changeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -361,32 +365,39 @@ public class PanelEvaluation extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error en la casilla del valor.");
             return;
         }
+        if (value<0) {
+            JOptionPane.showMessageDialog(this, "El valor tiene que ser positivo.");
+            return;
+        }
         try {
             id = Integer.parseInt(addTextFieldId.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error en la casilla id.");
             return;
         }
-        if (tree!=null) {
-            if (tree.exists(id)) {
-                JOptionPane.showMessageDialog(this, "Ya existe ese id");
-                return;
-            }
+        if (tree!=null && !tree.isEmpty() && tree.exists(id)) {
+            JOptionPane.showMessageDialog(this, "Ya existe ese id");
+            return;            
         }
         if (tree==null) {
             tree = new Tree(new Employee(value, name, area, id));
             model.addElement(tree.getRooth());
             addEmployeeLabel.setVisible(true);
         }else {
-            if (model.getSize()>0) {
+            if (addEmployeeList.getSelectedIndex()>-1) {
                 int number = addEmployeeList.getSelectedIndex();
                 Employee boss = (Employee) model.get(number);
                 tree.insertLeaf( boss, new Employee(value, name, area, id));
                 model.addElement(new Employee(value, name, area, id));
             }
             else {
+                JOptionPane.showMessageDialog(this, "No selecciono un empleado");
                 return;
             }
+        }
+        if (tree.getRooth()==null) {
+            tree.insertRooth(new Employee(value, name, area, id));
+            model.addElement(tree.getRooth());
         }
         tree.grades();
         treeTextArea.setText(tree.print());
@@ -395,7 +406,7 @@ public class PanelEvaluation extends javax.swing.JPanel {
     }//GEN-LAST:event_addEmployeeActionPerformed
 
     private void rmEmployeeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_rmEmployeeListValueChanged
-        if (model.getSize()>0) {
+        if (rmEmployeeList.getSelectedIndex()>-1) {
             Employee employee = (Employee) model.get(rmEmployeeList.getSelectedIndex());
             rmTextFieldName.setText(employee.getName());
             rmTextFieldId.setText(""+employee.getId());
@@ -405,16 +416,67 @@ public class PanelEvaluation extends javax.swing.JPanel {
     }//GEN-LAST:event_rmEmployeeListValueChanged
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        try {
-           Employee employee = (Employee) model.get(rmEmployeeList.getSelectedIndex());
-           model.remove(rmEmployeeList.getSelectedIndex());
-           tree.remove(employee);
-           treeTextArea.setText(tree.print());
-           JOptionPane.showMessageDialog(this, "Se ha eliminado el empleado");
-        } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(this, "Error al eliminar.");
+        if (rmEmployeeList.getSelectedIndex()>-1) {
+             Employee employee = (Employee) model.get(rmEmployeeList.getSelectedIndex());
+            model.remove(rmEmployeeList.getSelectedIndex());
+            tree.remove(employee);
+            if (tree.getRooth() != null) {
+                treeTextArea.setText(tree.print());
+            }
+            else {
+                treeTextArea.setText("");
+                rmTextFieldName.setText("");
+                rmTextFieldValue.setText("");
+                rmTextFieldId.setText("");
+                rmTextFieldArea.setText("");
+            }
+            JOptionPane.showMessageDialog(this, "Se ha eliminado el empleado");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "No selecciono un empleado");
         }
     }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeButtonActionPerformed
+        if (rmEmployeeList.getSelectedIndex()>-1) {
+            int number = rmEmployeeList.getSelectedIndex();
+            String name, area;
+            int value, id;
+            name = rmTextFieldName.getText();
+            if (name.equals("")) {
+                JOptionPane.showMessageDialog(this, "La casilla no posee nombre.");
+                return;
+            }
+            area = rmTextFieldArea.getText();
+            if (area.equals("")) {
+                JOptionPane.showMessageDialog(this, "La casilla no posee area de trabajo.");
+                return;
+            }
+            try {
+                id = Integer.parseInt(rmTextFieldId.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error en la casilla de id.");
+                return;
+            }
+            try {
+                value = Integer.parseInt(rmTextFieldValue.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error en la casilla de valor.");
+                return;
+            }
+            if (value<0) {
+                JOptionPane.showMessageDialog(this, "El valor tiene que ser positivo.");
+                return;
+            }
+            tree.changeEmployee(name, area, value, id,(Employee)model.get(number));
+            tree.grades();
+            treeTextArea.setText(tree.print());
+            rmEmployeeList.repaint();
+            
+        }else {
+            JOptionPane.showMessageDialog(this, "No se selecciono a ningun empleado.");
+        }
+    }//GEN-LAST:event_changeButtonActionPerformed
 
     
 
