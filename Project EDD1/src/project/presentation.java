@@ -3,19 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.edd1;
+package project;
 
 /**
  *
  * @author arles96
  */
 public class presentation extends javax.swing.JFrame {
+    
+    //Atributes
+    
+    private PresentationThread thread;
+    private float i=50, j=1;
 
-    /**
-     * Creates new form presentation
-     */
+    //Constructor
+    
     public presentation() {
         initComponents();
+        configurations();
+    }
+    
+    // administration methods
+    
+    private void configurations(){
+        this.setLocationRelativeTo(null);
+        thread = new PresentationThread(progress);
+        thread.start();
+        thread = null;
     }
 
     /**
@@ -27,37 +41,60 @@ public class presentation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        panelPresentation = new javax.swing.JPanel();
+        tittleLabel = new javax.swing.JLabel();
+        progress = new javax.swing.JProgressBar();
+        ImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project/edd1/img/computer-2653375_640.png"))); // NOI18N
+        panelPresentation.setBackground(java.awt.Color.black);
+        panelPresentation.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        tittleLabel.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        tittleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tittleLabel.setText("ESTRUCTURA DE DATOS I");
+        panelPresentation.add(tittleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 460, 30));
+
+        progress.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                progressStateChanged(evt);
+            }
+        });
+        panelPresentation.add(progress, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 440, -1));
+
+        ImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/computer-2653375_640.png"))); // NOI18N
+        panelPresentation.add(ImageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 0, -1, 493));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPresentation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPresentation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void progressStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_progressStateChanged
+        if (progress.getValue()==i) {
+            if (j!=101) {
+                this.setOpacity((100-j)/100);
+                i++;
+                j+=2;
+            }
+        }
+        if (progress.getValue()==100) {
+            MainMenu main = new MainMenu();
+            main.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_progressStateChanged
 
     /**
      * @param args the command line arguments
@@ -70,7 +107,7 @@ public class presentation extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windowns".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -87,15 +124,15 @@ public class presentation extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new presentation().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new presentation().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel ImageLabel;
+    private javax.swing.JPanel panelPresentation;
+    private javax.swing.JProgressBar progress;
+    private javax.swing.JLabel tittleLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,9 @@ package project;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import PerformanceEvaluation.PanelEvaluation;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,8 +34,14 @@ public class MainMenu extends javax.swing.JFrame {
     // administration method
     
     private void configurations(){
-        setResizable(false);
         setLocationRelativeTo(null);
+        try {
+            BackgroundBorder border = new 
+        BackgroundBorder(ImageIO.read(getClass().getResource("/img/background.png")));
+            mainPanel.setBorder(border);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
     }
     
     
@@ -64,37 +73,29 @@ public class MainMenu extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         performanceEvaluationButton = new javax.swing.JButton();
-        backgroundLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItemComeback = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setMinimumSize(new java.awt.Dimension(1261, 638));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MENU PRINCIPAL");
-        mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 960, 60));
 
         jButton1.setText("jButton1");
-        mainPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 230, 200, 40));
 
         jButton2.setText("jButton1");
-        mainPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 310, 200, 40));
 
         jButton3.setText("jButton1");
-        mainPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 390, 200, 40));
 
         jButton4.setText("jButton1");
-        mainPanel.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 200, 40));
 
         jButton5.setText("jButton1");
-        mainPanel.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 200, 40));
 
         jButton6.setText("jButton1");
-        mainPanel.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 310, 200, 40));
 
         performanceEvaluationButton.setText("Cálculo de Desempeño");
         performanceEvaluationButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,10 +103,52 @@ public class MainMenu extends javax.swing.JFrame {
                 performanceEvaluationButtonActionPerformed(evt);
             }
         });
-        mainPanel.add(performanceEvaluationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 200, 40));
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/background.png"))); // NOI18N
-        mainPanel.add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1260, -1));
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(330, 330, 330)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(450, 450, 450)
+                .addComponent(performanceEvaluationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(340, 340, 340)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(450, 450, 450)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(450, 450, 450)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(340, 340, 340)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(performanceEvaluationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(210, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -118,10 +161,21 @@ public class MainMenu extends javax.swing.JFrame {
             .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
+        jMenu1.setText("Archivo");
+
+        jMenuItemComeback.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemComeback.setText("Regresar");
+        jMenuItemComeback.setEnabled(false);
+        jMenuItemComeback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemComebackActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemComeback);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Editar");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -144,18 +198,25 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         panel = new PanelEvaluation();
         addPanel(panel);
+        jMenuItemComeback.setEnabled(true);
     }//GEN-LAST:event_performanceEvaluationButtonActionPerformed
+
+    private void jMenuItemComebackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemComebackActionPerformed
+        panel = null;
+        addPanel(mainPanel);
+        jMenuItemComeback.setEnabled(false);
+    }//GEN-LAST:event_jMenuItemComebackActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+        /*try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -174,13 +235,12 @@ public class MainMenu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
+        /*java.awt.EventQueue.invokeLater(() -> {
             new MainMenu().setVisible(true);
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel backgroundLabel;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -192,6 +252,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemComeback;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton performanceEvaluationButton;
     // End of variables declaration//GEN-END:variables
