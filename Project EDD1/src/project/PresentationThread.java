@@ -13,7 +13,7 @@ import javax.swing.JProgressBar;
  */
 public class PresentationThread extends Thread{
     
-    private JProgressBar progress;
+    private final JProgressBar progress;
 
     public PresentationThread(JProgressBar progress) {
         super();

@@ -9,9 +9,9 @@ package abstractClass;
  *
  * @author arles96
  */
-public abstract class AbastractTree {
+public abstract class AbstractTree {
     
-    public abstract void insertRooth(Object object);
+    public abstract void insertRoot(Object object);
     
     public abstract void insertLeaf(Object father, Object son);
     

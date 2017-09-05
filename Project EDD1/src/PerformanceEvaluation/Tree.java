@@ -5,35 +5,33 @@
  */
 package PerformanceEvaluation;
 
-import abstractClass.AbastractTree;
+import abstractClass.AbstractTree;
 import java.util.ArrayList;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author arles96
  */
-public class Tree extends AbastractTree{
+public class Tree extends AbstractTree{
     
-    private Employee rooth;
+    private Employee root;
     private ArrayList <Tree> tree = new ArrayList();
     
     //constructor
 
-    public Tree(Employee rooth) {
-        this.rooth = rooth;
+    public Tree(Employee root) {
+        this.root = root;
     }
     
     // getter and setter
 
-    public Employee getRooth() {
-        return rooth;
+    public Employee getRoot() {
+        return root;
     }
 
-    public void setRooth(Employee rooth) {
-        this.rooth = rooth;
+    public void setRoot(Employee root) {
+        this.root = root;
     }
 
     public ArrayList<Tree> getTree() {
@@ -48,17 +46,13 @@ public class Tree extends AbastractTree{
     
     @Override
     public boolean isEmpty(){
-        return rooth == null;
+        return root == null;
     }
     
     @Override
     public void clear(){
-        rooth = null;
+        root = null;
         tree.clear();
-    }
-    
-    public void remove(int id){
-        
     }
     
     @Override
@@ -72,25 +66,25 @@ public class Tree extends AbastractTree{
             int accumulator = 0;
             for (Tree t : tree) {
                 if (t.isLeaf()) {
-                    accumulator+= t.getRooth().getValue();
+                    accumulator+= t.getRoot().getValue();
                 }else {
                     t.grades();
-                    accumulator += t.getRooth().getGrade();
+                    accumulator += t.getRoot().getGrade();
                 }
             }
-            rooth.setGrade(accumulator/tree.size());
+            root.setGrade(accumulator/tree.size());
         }
     }
     
-   private String printRooth(){
-       return ">" + rooth.getName() + "_" + rooth.getGrade() + "\n";
+   private String printRoot(){
+       return ">" + root.getName() + "_" + root.getGrade() + "\n";
    }
    
    private String printChild(String space){
        String employees = "";
        for (Tree t : tree) {
-           employees += space + ">" + t.getRooth().getName() + "_" +
-                   t.getRooth().getGrade() + "\n";
+           employees += space + ">" + t.getRoot().getName() + "_" +
+                   t.getRoot().getGrade() + "\n";
            if (!t.isLeaf()) {
                employees += t.printChild(space + "    ");
            }           
@@ -101,22 +95,22 @@ public class Tree extends AbastractTree{
     @Override
    public String print(){
        String employees = "";
-       employees += printRooth();
+       employees += printRoot();
        employees += printChild("    ");
        return employees;
    }
 
     @Override
-    public void insertRooth(Object object) {
+    public void insertRoot(Object object) {
         if (object instanceof Employee) 
-            rooth = (Employee) object;
+            root = (Employee) object;
     }
 
     @Override
     public boolean exists(Object object) {
         if (object instanceof Integer) {
             int id = (Integer) object;
-            if (id==rooth.getId()) {
+            if (id==root.getId()) {
                 return true;
             }else {
                 if (tree.stream().anyMatch((t) -> (t.exists(object)))) {
@@ -132,13 +126,13 @@ public class Tree extends AbastractTree{
     @Override
     public void remove(Object object) {
         if (object instanceof Employee) {
-            if (rooth.equals(object)) {
-                rooth = null;
+            if (root.equals(object)) {
+                root = null;
                 tree.clear();
             }else {
                 for (Tree t : tree) {
                     t.remove(object);
-                    if (t.getRooth()==null) {
+                    if (t.getRoot()==null) {
                         tree.remove(t);
                         break;
                     }
@@ -146,14 +140,14 @@ public class Tree extends AbastractTree{
             }
         }
         else {
-            JOptionPane.showMessageDialog(null, "Error no es un empleado");
+            JOptionPane.showMessageDialog(null, "Error, no es un empleado");
         }
     }
 
     @Override
     public void insertLeaf(Object father, Object son) {
-        if (father instanceof Employee && son instanceof Employee && rooth!=null) {
-            if (rooth.equals((Employee)father)) {
+        if (father instanceof Employee && son instanceof Employee && root!=null) {
+            if (root.equals((Employee)father)) {
                 tree.add(new Tree((Employee)son));
             }else {
                 tree.forEach((t) -> {
@@ -166,25 +160,25 @@ public class Tree extends AbastractTree{
     }
     
     public void changeEmployee(String name, String area, int value, int id, Employee employee){
-        if (rooth.equals(employee)) {
-            if (!name.equals(rooth.getName())) {
-                rooth.setName(name);
+        if (root.equals(employee)) {
+            if (!name.equals(root.getName())) {
+                root.setName(name);
                 employee.setName(name);
                 JOptionPane.showMessageDialog(null, "Se ha modificado el nombre.");
             }
-            if (!area.equals(rooth.getArea())) {
-                rooth.setArea(area);
+            if (!area.equals(root.getArea())) {
+                root.setArea(area);
                 employee.setArea(area);
                 JOptionPane.showMessageDialog(null, "Se ha modificado el area.");
             }
-            if (id!=rooth.getId()) {
-                rooth.setId(id);
+            if (id!=root.getId()) {
+                root.setId(id);
                 employee.setId(id);
                 JOptionPane.showMessageDialog(null, "Se ha modificado el id.");
             }
             if (isLeaf()) {
-                if (value!=rooth.getValue()) {
-                    rooth.setValue(value);
+                if (value!=root.getValue()) {
+                    root.setValue(value);
                     employee.setValue(value);
                 }
             }else {

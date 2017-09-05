@@ -381,7 +381,7 @@ public class PanelEvaluation extends javax.swing.JPanel {
         }
         if (tree==null) {
             tree = new Tree(new Employee(value, name, area, id));
-            model.addElement(tree.getRooth());
+            model.addElement(tree.getRoot());
             addEmployeeLabel.setVisible(true);
         }else {
             if (addEmployeeList.getSelectedIndex()>-1) {
@@ -395,9 +395,9 @@ public class PanelEvaluation extends javax.swing.JPanel {
                 return;
             }
         }
-        if (tree.getRooth()==null) {
-            tree.insertRooth(new Employee(value, name, area, id));
-            model.addElement(tree.getRooth());
+        if (tree.getRoot()==null) {
+            tree.insertRoot(new Employee(value, name, area, id));
+            model.addElement(tree.getRoot());
         }
         tree.grades();
         treeTextArea.setText(tree.print());
@@ -420,7 +420,7 @@ public class PanelEvaluation extends javax.swing.JPanel {
              Employee employee = (Employee) model.get(rmEmployeeList.getSelectedIndex());
             model.remove(rmEmployeeList.getSelectedIndex());
             tree.remove(employee);
-            if (tree.getRooth() != null) {
+            if (tree.getRoot() != null) {
                 treeTextArea.setText(tree.print());
             }
             else {
