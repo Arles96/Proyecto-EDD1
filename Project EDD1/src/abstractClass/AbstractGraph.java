@@ -9,6 +9,16 @@ package abstractClass;
  *
  * @author arles96
  */
-public class AbstractGraph {
+public abstract class AbstractGraph {
     
+    public abstract void remove(Object object);
+    
+    public abstract void clear();
+    
+    public abstract boolean isEmpty();
+    
+    public abstract boolean exists(Object object);
+    
+    public abstract void insert(Object object);
+        
 }
