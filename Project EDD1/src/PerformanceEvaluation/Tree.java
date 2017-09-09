@@ -127,14 +127,12 @@ public class Tree extends AbstractTree{
     public void remove(Object object) {
         if (object instanceof Employee) {
             if (root.equals(object)) {
-                root = null;
-                tree.clear();
+                clear();
             }else {
-                for (Tree t : tree) {
-                    t.remove(object);
-                    if (t.getRoot()==null) {
-                        tree.remove(t);
-                        break;
+                for (int i = 0; i < tree.size(); i++) {
+                    tree.get(i).remove(object);
+                    if (tree.get(i).isEmpty()) {
+                        tree.remove(i);
                     }
                 }
             }
