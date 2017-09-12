@@ -5,38 +5,45 @@
  */
 package Dijkstra;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author arles96
  */
+
 public class Node {
     
     //Atributes
-    private String vertex;
+    private int vertex;
     private int distance;
-    private ArrayList<Node> connections = new ArrayList();
+    private int size;
+    private int accumulator;
+    private boolean solution;
+    private Node [] connections;
+    private Node brother;
 
     //Constructor
-    public Node(String vertex, int distance) {
+
+    public Node(int vertex, int size) {
         this.vertex = vertex;
-        this.distance = distance;
+        this.size = size;
+        connections = new Node[this.size];
+        this.solution = false;
+        accumulator = 0;
     }
 
-    public Node(String vertex) {
+    public Node(int vertex) {
         this.vertex = vertex;
-    }
+        this.solution = false;
+        accumulator = 0;
+    }    
     
     //getter and setter
 
-    public String getVertex() {
+    public int getVertex() {
         return vertex;
     }
 
-    public void setVertex(String vertex) {
+    public void setVertex(int vertex) {
         this.vertex = vertex;
     }
 
@@ -46,45 +53,79 @@ public class Node {
 
     public void setDistance(int distance) {
         this.distance = distance;
+        if (accumulator==0) {
+            setAccumulator(distance);
+        }
     }
 
-    public ArrayList<Node> getConnections() {
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public Node[] getConnections() {
         return connections;
     }
 
-    public void setConnections(ArrayList<Node> connections) {
+    public void setConnections(Node[] connections) {
         this.connections = connections;
+    }   
+
+    public int getAccumulator() {
+        return accumulator;
+    }
+
+    public void setAccumulator(int accumulator) {
+        this.accumulator = accumulator;
+    }
+
+    public boolean isSolution() {
+        return solution;
+    }
+
+    public void setSolution(boolean visited) {
+        this.solution = visited;
+    }
+
+    public Node getBrother() {
+        return brother;
+    }
+
+    public void setBrother(Node brother) {
+        this.brother = brother;
     }
     
     //administration methods
     
     public void addConnection(Node node){
-        boolean checker = false;
-        for (Node connection : connections) {
-            if (connection.equals(node)) {
-                checker = true;
+        for (int i = 0; i < size; i++) {
+            if (i+1==node.getVertex()) {
+                connections[i]= node;
+                break;
             }
-        }
-        if (checker==true) {
-            JOptionPane.showMessageDialog(null, "Es un elemento repetido.");
-        }else {
-            connections.add(node);
-            JOptionPane.showMessageDialog(null, "Se ha realizado una conexión.");
         }
     }
     
-    public void removeConnection(int index){
-        connections.remove(index);
+    public void removeConnection(Node node){
+        for (int i = 0; i < size; i++) {
+            if (i+1==node.getVertex()) {
+                connections[i] = null;
+                break;
+            }
+        }
     }
     
     public Node getConnection(int index){
-        return connections.get(index);
+        return connections[index];
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.vertex);
+        int hash = 7;
+        hash = 79 * hash + this.vertex;
         return hash;
     }
 
@@ -100,9 +141,14 @@ public class Node {
             return false;
         }
         final Node other = (Node) obj;
-        return Objects.equals(this.vertex, other.vertex);
+        return this.vertex == other.vertex;
+    }
+
+    @Override
+    public String toString() {
+        return "" + vertex;
     }
     
     
-    
+
 }

@@ -5,6 +5,7 @@
  */
 package project;
 
+import Dijkstra.PanelDijkstra;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import PerformanceEvaluation.PanelEvaluation;
@@ -17,6 +18,11 @@ import javax.swing.JOptionPane;
  * @author arles96
  */
 public class MainMenu extends javax.swing.JFrame {
+    
+    //Atributes    
+    
+    private PanelEvaluation panel_evaluation;
+    private PanelDijkstra panel_dijkstra;
 
     
     //Constructor
@@ -25,11 +31,6 @@ public class MainMenu extends javax.swing.JFrame {
         initComponents();
         configurations();
     }
-    
-    //Atributes
-    
-    
-    private PanelEvaluation panel;
     
     // administration method
     
@@ -52,6 +53,7 @@ public class MainMenu extends javax.swing.JFrame {
         contentPanel.add(panel, BorderLayout.CENTER);
         contentPanel.revalidate();
         contentPanel.repaint();
+        jMenuItemComeback.setEnabled(true);        
     }
 
     /**
@@ -85,7 +87,12 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MENU PRINCIPAL");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Menor costo un origen");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("jButton1");
 
@@ -195,17 +202,20 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void performanceEvaluationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performanceEvaluationButtonActionPerformed
-        // TODO add your handling code here:
-        panel = new PanelEvaluation();
-        addPanel(panel);
-        jMenuItemComeback.setEnabled(true);
+        panel_evaluation = new PanelEvaluation();
+        addPanel(panel_evaluation);
     }//GEN-LAST:event_performanceEvaluationButtonActionPerformed
 
     private void jMenuItemComebackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemComebackActionPerformed
-        panel = null;
+        panel_evaluation = null;
         addPanel(mainPanel);
         jMenuItemComeback.setEnabled(false);
     }//GEN-LAST:event_jMenuItemComebackActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        panel_dijkstra = new PanelDijkstra();
+        addPanel(panel_dijkstra);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

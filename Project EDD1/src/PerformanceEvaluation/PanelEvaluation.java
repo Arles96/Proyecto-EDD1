@@ -69,8 +69,6 @@ public class PanelEvaluation extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         addLabelName1 = new javax.swing.JLabel();
         rmTextFieldName = new javax.swing.JTextField();
-        addLabelId1 = new javax.swing.JLabel();
-        rmTextFieldId = new javax.swing.JTextField();
         addLabelArea1 = new javax.swing.JLabel();
         rmTextFieldArea = new javax.swing.JTextField();
         addLabelValue1 = new javax.swing.JLabel();
@@ -195,11 +193,6 @@ public class PanelEvaluation extends javax.swing.JPanel {
 
         rmTextFieldName.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
 
-        addLabelId1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        addLabelId1.setText("ID");
-
-        rmTextFieldId.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-
         addLabelArea1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         addLabelArea1.setText("Area");
 
@@ -246,32 +239,28 @@ public class PanelEvaluation extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 731, Short.MAX_VALUE)))
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addLabelArea1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addLabelValue1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rmTextFieldArea, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(rmTextFieldValue))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(341, 341, 341)
                 .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(353, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(296, 296, 296)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(addLabelValue1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(rmTextFieldValue, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(addLabelName1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                                .addComponent(addLabelArea1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(addLabelId1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(rmTextFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                                .addComponent(rmTextFieldArea)
-                                .addComponent(rmTextFieldId, javax.swing.GroupLayout.Alignment.TRAILING))))
+                    .addComponent(addLabelName1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(rmTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(296, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -280,8 +269,19 @@ public class PanelEvaluation extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addLabelArea1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rmTextFieldArea, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rmTextFieldValue)
+                            .addComponent(addLabelValue1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(117, 117, 117)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -292,19 +292,7 @@ public class PanelEvaluation extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(addLabelName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(rmTextFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(rmTextFieldId, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                        .addComponent(addLabelId1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(18, 18, 18)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(addLabelArea1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rmTextFieldArea, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(rmTextFieldValue, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                        .addComponent(addLabelValue1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap(157, Short.MAX_VALUE)))
+                    .addContainerGap(312, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Modificar y Eliminar", jPanel2);
@@ -346,6 +334,71 @@ public class PanelEvaluation extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeButtonActionPerformed
+        if (rmEmployeeList.getSelectedIndex()>-1) {
+            int number = rmEmployeeList.getSelectedIndex();
+            String name, area;
+            int value, id;
+            name = rmTextFieldName.getText();
+            if (name.equals("")) {
+                JOptionPane.showMessageDialog(this, "La casilla no posee nombre.");
+                return;
+            }
+            area = rmTextFieldArea.getText();
+            if (area.equals("")) {
+                JOptionPane.showMessageDialog(this, "La casilla no posee area de trabajo.");
+                return;
+            }
+            try {
+                value = Integer.parseInt(rmTextFieldValue.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error en la casilla de valor.");
+                return;
+            }
+            if (value<0) {
+                JOptionPane.showMessageDialog(this, "El valor tiene que ser positivo.");
+                return;
+            }
+            tree.changeEmployee(name, area, value,(Employee)model.get(number));
+            tree.grades();
+            treeTextArea.setText(tree.print());
+            rmEmployeeList.repaint();
+
+        }else {
+            JOptionPane.showMessageDialog(this, "No se selecciono a ningun empleado.");
+        }
+    }//GEN-LAST:event_changeButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        if (rmEmployeeList.getSelectedIndex()>-1) {
+            Employee employee = (Employee) model.get(rmEmployeeList.getSelectedIndex());
+            model.remove(rmEmployeeList.getSelectedIndex());
+            tree.remove(employee);
+            if (tree.getRoot() != null) {
+                treeTextArea.setText(tree.print());
+            }
+            else {
+                treeTextArea.setText("");
+                rmTextFieldName.setText("");
+                rmTextFieldValue.setText("");
+                rmTextFieldArea.setText("");
+            }
+            JOptionPane.showMessageDialog(this, "Se ha eliminado el empleado");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "No selecciono un empleado");
+        }
+    }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void rmEmployeeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_rmEmployeeListValueChanged
+        if (rmEmployeeList.getSelectedIndex()>-1) {
+            Employee employee = (Employee) model.get(rmEmployeeList.getSelectedIndex());
+            rmTextFieldName.setText(employee.getName());
+            rmTextFieldArea.setText(employee.getArea());
+            rmTextFieldValue.setText("" + employee.getGrade());
+        }
+    }//GEN-LAST:event_rmEmployeeListValueChanged
+
     private void addEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeActionPerformed
         String name, area;
         int value, id;
@@ -377,7 +430,7 @@ public class PanelEvaluation extends javax.swing.JPanel {
         }
         if (tree!=null && !tree.isEmpty() && tree.exists(id)) {
             JOptionPane.showMessageDialog(this, "Ya existe ese id");
-            return;            
+            return;
         }
         if (tree==null) {
             tree = new Tree(new Employee(value, name, area, id));
@@ -405,79 +458,6 @@ public class PanelEvaluation extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Se ha agregado un Empleado.");
     }//GEN-LAST:event_addEmployeeActionPerformed
 
-    private void rmEmployeeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_rmEmployeeListValueChanged
-        if (rmEmployeeList.getSelectedIndex()>-1) {
-            Employee employee = (Employee) model.get(rmEmployeeList.getSelectedIndex());
-            rmTextFieldName.setText(employee.getName());
-            rmTextFieldId.setText(""+employee.getId());
-            rmTextFieldArea.setText(employee.getArea());
-            rmTextFieldValue.setText("" + employee.getGrade());
-        }
-    }//GEN-LAST:event_rmEmployeeListValueChanged
-
-    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        if (rmEmployeeList.getSelectedIndex()>-1) {
-             Employee employee = (Employee) model.get(rmEmployeeList.getSelectedIndex());
-            model.remove(rmEmployeeList.getSelectedIndex());
-            tree.remove(employee);
-            if (tree.getRoot() != null) {
-                treeTextArea.setText(tree.print());
-            }
-            else {
-                treeTextArea.setText("");
-                rmTextFieldName.setText("");
-                rmTextFieldValue.setText("");
-                rmTextFieldId.setText("");
-                rmTextFieldArea.setText("");
-            }
-            JOptionPane.showMessageDialog(this, "Se ha eliminado el empleado");
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "No selecciono un empleado");
-        }
-    }//GEN-LAST:event_removeButtonActionPerformed
-
-    private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeButtonActionPerformed
-        if (rmEmployeeList.getSelectedIndex()>-1) {
-            int number = rmEmployeeList.getSelectedIndex();
-            String name, area;
-            int value, id;
-            name = rmTextFieldName.getText();
-            if (name.equals("")) {
-                JOptionPane.showMessageDialog(this, "La casilla no posee nombre.");
-                return;
-            }
-            area = rmTextFieldArea.getText();
-            if (area.equals("")) {
-                JOptionPane.showMessageDialog(this, "La casilla no posee area de trabajo.");
-                return;
-            }
-            try {
-                id = Integer.parseInt(rmTextFieldId.getText());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Error en la casilla de id.");
-                return;
-            }
-            try {
-                value = Integer.parseInt(rmTextFieldValue.getText());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Error en la casilla de valor.");
-                return;
-            }
-            if (value<0) {
-                JOptionPane.showMessageDialog(this, "El valor tiene que ser positivo.");
-                return;
-            }
-            tree.changeEmployee(name, area, value, id,(Employee)model.get(number));
-            tree.grades();
-            treeTextArea.setText(tree.print());
-            rmEmployeeList.repaint();
-            
-        }else {
-            JOptionPane.showMessageDialog(this, "No se selecciono a ningun empleado.");
-        }
-    }//GEN-LAST:event_changeButtonActionPerformed
-
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -487,7 +467,6 @@ public class PanelEvaluation extends javax.swing.JPanel {
     private javax.swing.JLabel addLabelArea;
     private javax.swing.JLabel addLabelArea1;
     private javax.swing.JLabel addLabelId;
-    private javax.swing.JLabel addLabelId1;
     private javax.swing.JLabel addLabelName;
     private javax.swing.JLabel addLabelName1;
     private javax.swing.JLabel addLabelValue;
@@ -507,7 +486,6 @@ public class PanelEvaluation extends javax.swing.JPanel {
     private javax.swing.JButton removeButton;
     private javax.swing.JList<String> rmEmployeeList;
     private javax.swing.JTextField rmTextFieldArea;
-    private javax.swing.JTextField rmTextFieldId;
     private javax.swing.JTextField rmTextFieldName;
     private javax.swing.JTextField rmTextFieldValue;
     private javax.swing.JLabel tittleLabel;

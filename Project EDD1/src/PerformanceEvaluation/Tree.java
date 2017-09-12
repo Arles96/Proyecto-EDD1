@@ -157,7 +157,7 @@ public class Tree extends AbstractTree{
         }
     }
     
-    public void changeEmployee(String name, String area, int value, int id, Employee employee){
+    public void changeEmployee(String name, String area, int value, Employee employee){
         if (root.equals(employee)) {
             if (!name.equals(root.getName())) {
                 root.setName(name);
@@ -169,11 +169,6 @@ public class Tree extends AbstractTree{
                 employee.setArea(area);
                 JOptionPane.showMessageDialog(null, "Se ha modificado el area.");
             }
-            if (id!=root.getId()) {
-                root.setId(id);
-                employee.setId(id);
-                JOptionPane.showMessageDialog(null, "Se ha modificado el id.");
-            }
             if (isLeaf()) {
                 if (value!=root.getValue()) {
                     root.setValue(value);
@@ -184,7 +179,7 @@ public class Tree extends AbstractTree{
             }
         }else {
             tree.forEach((t) -> {
-                t.changeEmployee(name, area, value, id, employee);
+                t.changeEmployee(name, area, value, employee);
             });
         }
     }
