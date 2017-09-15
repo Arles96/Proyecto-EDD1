@@ -5,6 +5,14 @@
  */
 package Dijkstra;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author arles96
@@ -14,12 +22,15 @@ public class Node {
     
     //Atributes
     private int vertex;
+    private int x;
+    private int y;
     private int distance;
     private int size;
     private int accumulator;
     private boolean solution;
     private Node [] connections;
-    private Node brother;
+    private int counter = 0;
+    public static final int DIAMETER = 40;
 
     //Constructor
 
@@ -35,7 +46,15 @@ public class Node {
         this.vertex = vertex;
         this.solution = false;
         accumulator = 0;
-    }    
+    }   
+
+    public Node(int vertex, int x, int y, int size) {
+        this.vertex = vertex;
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.connections = new Node[this.size];
+    }
     
     //getter and setter
 
@@ -90,31 +109,47 @@ public class Node {
         this.solution = visited;
     }
 
-    public Node getBrother() {
-        return brother;
+    public int getX() {
+        return x;
     }
 
-    public void setBrother(Node brother) {
-        this.brother = brother;
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
     
     //administration methods
     
-    public void addConnection(Node node){
-        for (int i = 0; i < size; i++) {
-            if (i+1==node.getVertex()) {
-                connections[i]= node;
-                break;
-            }
+    public void addConnection(Node node, int distance){
+        if (connections[node.getVertex()-1]==null) {
+            node.setDistance(distance);
+            connections[node.getVertex()-1] = node;
+            System.out.println(connections[node.getVertex()-1].getVertex());
+            counter++;
+        }else {
+            JOptionPane.showMessageDialog(null, "Ya existe una conexión.");
         }
     }
     
     public void removeConnection(Node node){
-        for (int i = 0; i < size; i++) {
-            if (i+1==node.getVertex()) {
-                connections[i] = null;
-                break;
-            }
+        if (connections[node.getVertex()-1]!=null) {
+            connections[node.getVertex()-1] = null;
+            counter--;
         }
     }
     
@@ -149,6 +184,93 @@ public class Node {
         return "" + vertex;
     }
     
+    private void paintRedNode(JPanel panel){
+        Graphics g = panel.getGraphics();
+        g.setColor(Color.red);
+        g.fillOval(x-DIAMETER/2, y-DIAMETER/2, DIAMETER, DIAMETER);
+        g.setColor(Color.white);
+        g.drawString("" + vertex, x, y);
+    }
     
+    private void paintRedArrow(JPanel panel, int i){
+        Graphics g = panel.getGraphics();
+        double ang, angSep;
+        double tx,ty;
+        int dist;
+        int x2,y2;
+        int r = DIAMETER/2;
+        if (x+r<getConnection(i).getX() && y+r<getConnection(i).getY()) {
+            x2 = getConnection(i).getX()-r;
+            y2 = getConnection(i).getY() - r/2;
+        }else if (x-r>getConnection(i).getX() && y+r>getConnection(i).getY()) {
+            x2 = getConnection(i).getX() + r ;
+            y2 = getConnection(i).getY() + r/2;
+        }else if (x-r>getConnection(i).getX() && y+r<getConnection(i).getY()) {
+            x2 = getConnection(i).getX() + r;
+            y2 = getConnection(i).getY() - r/2;
+        }else if (x+r<getConnection(i).getX() && y-r>getConnection(i).getY()) {
+            x2 = getConnection(i).getX() - r;
+            y2 = getConnection(i).getY() + r/2;
+        }else if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
+                && y+r<getConnection(i).getY()) {
+            x2 = getConnection(i).getX();
+            y2 = getConnection(i).getY() - r;
+        }else if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
+                && y-r>getConnection(i).getY()) {
+            x2 = getConnection(i).getX();
+            y2 = getConnection(i).getY() + r;
+        }else if (y+r>getConnection(i).getY() && y-r<getConnection(i).getY()
+                && x+r<getConnection(i).getX()) {
+            y2 = getConnection(i).getY();
+            x2 = getConnection(i).getX() - r;
+        }else {
+            y2 = getConnection(i).getY();
+            x2 = getConnection(i).getX() + r;
+        }
+        Point point1,point2;
+        point1=new Point(x,y);
+        point2=new Point(x2,y2);
+        dist=15;
+        ty=-(point1.y-point2.y)*1.0;
+     tx=(point1.x-point2.x)*1.0;
+     ang=Math.atan (ty/tx);
 
+     if(tx<0)
+     {// si tx es negativo aumentar 180 grados
+        ang+=Math.PI;
+     }
+     //puntos de control para la punta
+     //p1 y p2 son los puntos de salida
+     Point p1=new Point(),p2=new Point(),point=point2;
+     //angulo de separacion
+     angSep=25.0;
+     p1.x=(int)(point.x+dist*Math.cos (ang-Math.toRadians (angSep)));
+     p1.y=(int)(point.y-dist*Math.sin (ang-Math.toRadians (angSep)));
+     p2.x=(int)(point.x+dist*Math.cos (ang+Math.toRadians (angSep)));
+     p2.y=(int)(point.y-dist*Math.sin (ang+Math.toRadians (angSep)));
+     Graphics2D g2D=(Graphics2D)g;
+     //dale color a la linea
+     g.setColor (Color.red);
+     // grosor de la linea
+     g2D.setStroke (new BasicStroke(2.5f));
+     //dibuja la linea de extremo a extremo
+     g.drawLine (point1.x,point1.y,point.x,point.y);
+     //dibujar la punta
+     g.drawLine (p1.x,p1.y,point.x,point.y);
+     g.drawLine (p2.x,p2.y,point.x,point.y);
+    }
+    
+    public void paint(JPanel panel){
+        if (counter==0) {
+            paintRedNode(panel);
+        }else {
+            paintRedNode(panel);
+            for (int i = 0; i < size; i++) {
+                if (getConnection(i)!=null) {
+                    paintRedArrow(panel, i);
+                }
+            }
+        }
+    }
+    
 }

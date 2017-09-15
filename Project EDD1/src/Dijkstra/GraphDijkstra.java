@@ -14,12 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class GraphDijkstra extends AbstractGraph {
     
-    
-    
     //Atributos
     private Node[] nodes;
     private Node[] solution;
-    private int counter2;
     private int size;
     private int counter;
     
@@ -65,20 +62,24 @@ public class GraphDijkstra extends AbstractGraph {
     public void setSolution(Node[] solution) {
         this.solution = solution;
     }
-
-    public int getCounter2() {
-        return counter2;
-    }
-
-    public void setCounter2(int counter2) {
-        this.counter2 = counter2;
+    
+    public Node getNode(int index){
+        return nodes[index];
     }
        
     //Administration methods
 
     @Override
     public void remove(Object object) {
-        
+        if (object instanceof Node) {
+            for (int i = 0; i < size; i++) {
+                nodes[i].removeConnection((Node)object);
+                if (nodes[i].equals(object)) {
+                    nodes[i] = null;
+                    counter--;
+                }
+            }
+        }
     }
 
     @Override
@@ -114,12 +115,11 @@ public class GraphDijkstra extends AbstractGraph {
         }
     }
     
-    public void makeConnection(Node node1, Node node2){
-        for (int i = 0; i < counter; i++) {
-            if (nodes[i].equals(node1)) {
-                nodes[i].addConnection(node2);
-                break;
-            }
+    public void makeConnection(Node node1, Node node2, int distance){
+        if (nodes[node1.getVertex()-1]!=null) {
+            nodes[node1.getVertex()-1].addConnection(node2, distance);
+        }else {
+            JOptionPane.showMessageDialog(null, "El nodo no existe.");
         }
     }
     
@@ -158,7 +158,7 @@ public class GraphDijkstra extends AbstractGraph {
                     if (less!=0 && less>list[j].getAccumulator() && !list[i].isSolution()) {
                         less = list[j].getAccumulator();
                         temporal = list[j].getConnection(j);
-                        index = j;
+                        index = j;  
                     }
                     
                 }

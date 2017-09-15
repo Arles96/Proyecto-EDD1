@@ -5,17 +5,50 @@
  */
 package Dijkstra;
 
+import java.awt.event.MouseEvent;
+import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author arles96
  */
 public class PanelDijkstra extends javax.swing.JPanel {
+    
+    // Atributes
+    private boolean useCanvas = false;
+    private int counter = 1;
+    private int size = 0;
+    private GraphDijkstra graph;
+    private DefaultListModel model = new DefaultListModel();
 
-    /**
-     * Creates new form PanelDijkstra
-     */
+    //Constructor
     public PanelDijkstra() {
         initComponents();
+        configuration();
+    }
+    
+    // administration methods
+    
+    public void painting(){
+        for (int i = 0; i < graph.getSize(); i++) {
+            if (graph.getNode(i)!=null) {
+                graph.getNode(i).paint(canvasPanel);
+            }
+        }
+    }
+    
+    private void visiblejDialog(JDialog view){
+        view.setModal(true);
+        view.pack();
+        view.setLocationRelativeTo(this);
+        view.setVisible(true);
+    }
+    
+    private void configuration(){
+        nodeList1.setModel(model);
+        nodeList2.setModel(model);
     }
 
     /**
@@ -27,40 +60,235 @@ public class PanelDijkstra extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogSize = new javax.swing.JDialog();
+        descriptionSizeLabel = new javax.swing.JLabel();
+        sizeTextField = new javax.swing.JTextField();
+        acceptSizeButton = new javax.swing.JButton();
+        jDialogConnection = new javax.swing.JDialog();
+        subtittleLabel1 = new javax.swing.JLabel();
+        subtittleLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        nodeList1 = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        nodeList2 = new javax.swing.JList<>();
+        connectionButton = new javax.swing.JButton();
+        tittleConnectionLabel = new javax.swing.JLabel();
+        distanceTextField = new javax.swing.JTextField();
         contentPanel = new javax.swing.JPanel();
         tittleLabel = new javax.swing.JLabel();
-        canvasPanel = new java.awt.Panel();
+        addConnectionButton = new javax.swing.JButton();
+        enableCanvasButton = new javax.swing.JButton();
+        dijkstraButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
+        sizeButton = new javax.swing.JButton();
+        openFileButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        canvasPanel = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(240, 240, 242));
+        descriptionSizeLabel.setText("Ingrese un nuevo numero maximo de Nodos");
+
+        sizeTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        acceptSizeButton.setText("Aceptar");
+        acceptSizeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptSizeButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogSizeLayout = new javax.swing.GroupLayout(jDialogSize.getContentPane());
+        jDialogSize.getContentPane().setLayout(jDialogSizeLayout);
+        jDialogSizeLayout.setHorizontalGroup(
+            jDialogSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogSizeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(descriptionSizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, Short.MAX_VALUE)
+                    .addComponent(sizeTextField)
+                    .addComponent(acceptSizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialogSizeLayout.setVerticalGroup(
+            jDialogSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogSizeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(descriptionSizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(acceptSizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        subtittleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        subtittleLabel1.setText("Node 1");
+
+        subtittleLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        subtittleLabel2.setText("Node 2");
+
+        jScrollPane2.setViewportView(nodeList1);
+
+        jScrollPane3.setViewportView(nodeList2);
+
+        connectionButton.setText("Conectar");
+        connectionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectionButtonActionPerformed(evt);
+            }
+        });
+
+        tittleConnectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tittleConnectionLabel.setText("CONECTANDO NODOS");
+
+        javax.swing.GroupLayout jDialogConnectionLayout = new javax.swing.GroupLayout(jDialogConnection.getContentPane());
+        jDialogConnection.getContentPane().setLayout(jDialogConnectionLayout);
+        jDialogConnectionLayout.setHorizontalGroup(
+            jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogConnectionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tittleConnectionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jDialogConnectionLayout.createSequentialGroup()
+                        .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(subtittleLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(distanceTextField))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(subtittleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+        );
+        jDialogConnectionLayout.setVerticalGroup(
+            jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogConnectionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tittleConnectionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDialogConnectionLayout.createSequentialGroup()
+                        .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(subtittleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(subtittleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDialogConnectionLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(distanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(98, 98, 98))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogConnectionLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(14, 14, 14))
+        );
+
+        setBackground(new java.awt.Color(146, 146, 210));
+
+        contentPanel.setBackground(new java.awt.Color(146, 146, 210));
 
         tittleLabel.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         tittleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tittleLabel.setText("MENOR COSTO UN ORIGEN / TODOS LOS DESTINOS (DIJKSTRA)");
 
+        addConnectionButton.setText("Agregar conexión");
+        addConnectionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addConnectionButtonActionPerformed(evt);
+            }
+        });
+
+        enableCanvasButton.setText("Habilitar Lienzo");
+        enableCanvasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enableCanvasButtonActionPerformed(evt);
+            }
+        });
+
+        dijkstraButton.setText("Dijkstra");
+
+        saveButton.setText("Guardar");
+
+        removeButton.setText("Eliminar");
+
+        sizeButton.setText("Ingresar Tamaño");
+        sizeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sizeButtonActionPerformed(evt);
+            }
+        });
+
+        openFileButton.setText("Abrir Archivo");
+
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tittleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1211, Short.MAX_VALUE)
+            .addComponent(tittleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(contentPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(openFileButton)
+                .addGap(18, 18, 18)
+                .addComponent(sizeButton)
+                .addGap(18, 18, 18)
+                .addComponent(addConnectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(enableCanvasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(dijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
-                .addComponent(tittleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 64, Short.MAX_VALUE))
+                .addComponent(tittleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enableCanvasButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addConnectionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dijkstraButton)
+                    .addComponent(saveButton)
+                    .addComponent(removeButton)
+                    .addComponent(sizeButton)
+                    .addComponent(openFileButton))
+                .addGap(18, 18, 18))
         );
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setEnabled(false);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("DIJKSTRA");
+
         canvasPanel.setBackground(java.awt.Color.white);
+        canvasPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                canvasPanelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout canvasPanelLayout = new javax.swing.GroupLayout(canvasPanel);
         canvasPanel.setLayout(canvasPanelLayout);
         canvasPanelLayout.setHorizontalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 986, Short.MAX_VALUE)
         );
         canvasPanelLayout.setVerticalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -70,23 +298,172 @@ public class PanelDijkstra extends javax.swing.JPanel {
             .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(canvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(canvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(canvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(canvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void canvasPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_canvasPanelMouseClicked
+        if (!useCanvas) {
+            JOptionPane.showMessageDialog(this, "Presione el boton de habilitar " +
+                    "para agregar nodos.");
+        }else{
+            if (counter-1==size && size>0) {
+                JOptionPane.showMessageDialog(this, "Se ha llegado al limite de nodos.");
+                return;
+            }
+            if (size==0) {
+                JOptionPane.showMessageDialog(this, "Ingrese un tamaño de nodos");
+                return;
+            }
+            if (evt.getButton() == MouseEvent.BUTTON1) {                 
+                Node node = new Node(counter, evt.getX(), evt.getY(), size);
+                graph.insert(node);
+                model.addElement(node);
+                counter++;
+                painting();
+            }
+        }
+    }//GEN-LAST:event_canvasPanelMouseClicked
+
+    private void sizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizeButtonActionPerformed
+        visiblejDialog(jDialogSize);
+    }//GEN-LAST:event_sizeButtonActionPerformed
+
+    private void acceptSizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptSizeButtonActionPerformed
+        if (size==0) {
+            try {
+                size = Integer.parseInt(sizeTextField.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error, no es un numero.");
+                return;
+            }
+            if (size<0) {
+                JOptionPane.showMessageDialog(this, "Error, no se aceptan numeros negativos.");
+                size = 0;
+                return;
+            }
+            graph = new GraphDijkstra(size);
+            useCanvas = true;
+            jDialogSize.setVisible(false);
+            jDialogSize.dispose();
+            sizeButton.setText("Modificar tamaño");
+        }else {
+            int number = size;
+            try {
+                size = Integer.parseInt(sizeTextField.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error, no es un numero.");
+                return;
+            }
+            if (size<number) {
+                size = number;
+                JOptionPane.showMessageDialog(this, "El numero tiene que ser mayor" +
+                        " que el ingresado anterior mente.");
+                return;
+            }
+            if (size<0) {
+                JOptionPane.showMessageDialog(this, "Error, no se aceptan numeros negativos.");
+                size = 0;
+                return;
+            }
+            graph = new GraphDijkstra(size);
+            useCanvas = true;
+            jDialogSize.setVisible(false);
+            jDialogSize.dispose();
+        }
+    }//GEN-LAST:event_acceptSizeButtonActionPerformed
+
+    private void enableCanvasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableCanvasButtonActionPerformed
+        if (!useCanvas) {
+            useCanvas = true;
+            enableCanvasButton.setText("Deshabilitar Lienzo");
+        }else {
+            useCanvas = false;
+            enableCanvasButton.setText("Habilitar Lienzo");
+        }
+    }//GEN-LAST:event_enableCanvasButtonActionPerformed
+
+    private void addConnectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConnectionButtonActionPerformed
+        if (size==0) {
+            JOptionPane.showMessageDialog(this, "No ha ingresado un tamaño.");
+        }else if (counter==1) {
+            JOptionPane.showMessageDialog(this, "No se ha agregado ningun nodo.");
+        }else{
+            visiblejDialog(jDialogConnection);
+        }
+    }//GEN-LAST:event_addConnectionButtonActionPerformed
+
+    private void connectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectionButtonActionPerformed
+        if (nodeList1.getSelectedIndex()>-1 && nodeList2.getSelectedIndex()>-1
+                    && nodeList1.getSelectedIndex()!=nodeList2.getSelectedIndex()) {
+            int distance=0;
+            try {
+                distance = Integer.parseInt(distanceTextField.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error, ingrese un numero.");
+            }
+            if (distance<=0) {
+                JOptionPane.showMessageDialog(this, "El numero tiene que ser " + 
+                        " mayor que cero.");
+                return;
+            }
+            graph.makeConnection(graph.getNode(nodeList1.getSelectedIndex()),
+                    graph.getNode(nodeList2.getSelectedIndex()), distance);
+            JOptionPane.showMessageDialog(this, "Se ha realizado una conexión.");
+            jDialogConnection.setVisible(false);
+            jDialogConnection.dispose();
+            painting();
+        }else {
+            JOptionPane.showMessageDialog(this, "Error Al realizar una conexión.");
+        }
+    }//GEN-LAST:event_connectionButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Panel canvasPanel;
+    private javax.swing.JButton acceptSizeButton;
+    private javax.swing.JButton addConnectionButton;
+    private javax.swing.JPanel canvasPanel;
+    private javax.swing.JButton connectionButton;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JLabel descriptionSizeLabel;
+    private javax.swing.JButton dijkstraButton;
+    private javax.swing.JTextField distanceTextField;
+    private javax.swing.JButton enableCanvasButton;
+    private javax.swing.JDialog jDialogConnection;
+    private javax.swing.JDialog jDialogSize;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JList<String> nodeList1;
+    private javax.swing.JList<String> nodeList2;
+    private javax.swing.JButton openFileButton;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JButton sizeButton;
+    private javax.swing.JTextField sizeTextField;
+    private javax.swing.JLabel subtittleLabel1;
+    private javax.swing.JLabel subtittleLabel2;
+    private javax.swing.JLabel tittleConnectionLabel;
     private javax.swing.JLabel tittleLabel;
     // End of variables declaration//GEN-END:variables
 }
