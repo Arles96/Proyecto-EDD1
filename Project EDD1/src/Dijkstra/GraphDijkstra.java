@@ -73,12 +73,16 @@ public class GraphDijkstra extends AbstractGraph {
     public void remove(Object object) {
         if (object instanceof Node) {
             for (int i = 0; i < size; i++) {
-                nodes[i].removeConnection((Node)object);
-                if (nodes[i].equals(object)) {
-                    nodes[i] = null;
-                    counter--;
-                }
+                if (nodes[i]!=null) {
+                    nodes[i].removeConnection((Node)object);
+                    if (nodes[i].equals(object)) {
+                        nodes[i] = null;
+                        counter--;
+                    }
+                }                
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al eliminar");
         }
     }
 

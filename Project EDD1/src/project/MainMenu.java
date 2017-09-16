@@ -9,8 +9,10 @@ import Dijkstra.PanelDijkstra;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import PerformanceEvaluation.PanelEvaluation;
+import java.awt.Graphics;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,8 +36,16 @@ public class MainMenu extends javax.swing.JFrame {
     
     // administration method
     
+    @Override
+    public void paint(Graphics g){
+        super.paint(g);
+        if (panel_dijkstra!=null) {
+        }
+    }
+    
     private void configurations(){
         setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("../img/logo.jpg")).getImage());    
         try {
             BackgroundBorder border = new 
         BackgroundBorder(ImageIO.read(getClass().getResource("/img/background.png")));

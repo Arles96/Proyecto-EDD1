@@ -7,6 +7,7 @@ package Dijkstra;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -184,90 +185,125 @@ public class Node {
         return "" + vertex;
     }
     
-    private void paintRedNode(JPanel panel){
-        Graphics g = panel.getGraphics();
+    private void paintRedNode(Graphics g){
         g.setColor(Color.red);
         g.fillOval(x-DIAMETER/2, y-DIAMETER/2, DIAMETER, DIAMETER);
         g.setColor(Color.white);
+        g.setFont(new Font("Arial", Font.BOLD, 12));
         g.drawString("" + vertex, x, y);
     }
     
-    private void paintRedArrow(JPanel panel, int i){
-        Graphics g = panel.getGraphics();
+    private void paintRedArrow(Graphics g, int i){
         double ang, angSep;
         double tx,ty;
         int dist;
         int x2,y2;
+        int x3, y3;
+        int xs, ys;
         int r = DIAMETER/2;
         if (x+r<getConnection(i).getX() && y+r<getConnection(i).getY()) {
             x2 = getConnection(i).getX()-r;
             y2 = getConnection(i).getY() - r/2;
+            x3 = x + r;
+            y3 = y + r/2;
+            xs = (x2-x3)/2  + x3;
+            ys = (y2-y3)/2 + y3;
         }else if (x-r>getConnection(i).getX() && y+r>getConnection(i).getY()) {
             x2 = getConnection(i).getX() + r ;
             y2 = getConnection(i).getY() + r/2;
+            x3 = x - r;
+            y3 = y - r/2;
+            xs = (x3-x2)/2  + x2;
+            ys = (y3-y2)/2 + y2;
         }else if (x-r>getConnection(i).getX() && y+r<getConnection(i).getY()) {
             x2 = getConnection(i).getX() + r;
             y2 = getConnection(i).getY() - r/2;
+            x3 = x - r;
+            y3 = y + r/2;
+            xs = (x3-x2)/2 + x2;
+            ys = (y2-y3)/2 + y3;
         }else if (x+r<getConnection(i).getX() && y-r>getConnection(i).getY()) {
             x2 = getConnection(i).getX() - r;
             y2 = getConnection(i).getY() + r/2;
+            x3 = x + r;
+            y3 = y - r/2;
+            xs = (x2-x3)/2 + x3;
+            ys = (y3-y2)/2 + y2;
         }else if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
                 && y+r<getConnection(i).getY()) {
             x2 = getConnection(i).getX();
             y2 = getConnection(i).getY() - r;
+            x3 = x;
+            y3 = y + r;
+            xs = x3 - 15;
+            ys = (y2-y3)/2 + y3;
         }else if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
                 && y-r>getConnection(i).getY()) {
             x2 = getConnection(i).getX();
             y2 = getConnection(i).getY() + r;
+            x3 = x;
+            y3 = y - r;
+            xs = x2 + 15;
+            ys = (y3-y2)/2 + y2;
         }else if (y+r>getConnection(i).getY() && y-r<getConnection(i).getY()
                 && x+r<getConnection(i).getX()) {
             y2 = getConnection(i).getY();
             x2 = getConnection(i).getX() - r;
+            y3 = y;
+            x3 = x + r;
+            xs = (x2-x3)/2 + x3;
+            ys = y3 + 10;
         }else {
             y2 = getConnection(i).getY();
             x2 = getConnection(i).getX() + r;
+            y3 = y;
+            x3 = x - r;
+            xs = (x3-x2)/2 + x2;
+            ys = y2 - 10;
         }
         Point point1,point2;
-        point1=new Point(x,y);
+        point1=new Point(x3,y3);
         point2=new Point(x2,y2);
         dist=15;
         ty=-(point1.y-point2.y)*1.0;
-     tx=(point1.x-point2.x)*1.0;
-     ang=Math.atan (ty/tx);
-
-     if(tx<0)
-     {// si tx es negativo aumentar 180 grados
-        ang+=Math.PI;
-     }
-     //puntos de control para la punta
-     //p1 y p2 son los puntos de salida
-     Point p1=new Point(),p2=new Point(),point=point2;
-     //angulo de separacion
-     angSep=25.0;
-     p1.x=(int)(point.x+dist*Math.cos (ang-Math.toRadians (angSep)));
-     p1.y=(int)(point.y-dist*Math.sin (ang-Math.toRadians (angSep)));
-     p2.x=(int)(point.x+dist*Math.cos (ang+Math.toRadians (angSep)));
-     p2.y=(int)(point.y-dist*Math.sin (ang+Math.toRadians (angSep)));
-     Graphics2D g2D=(Graphics2D)g;
-     //dale color a la linea
-     g.setColor (Color.red);
-     // grosor de la linea
-     g2D.setStroke (new BasicStroke(2.5f));
-     //dibuja la linea de extremo a extremo
-     g.drawLine (point1.x,point1.y,point.x,point.y);
-     //dibujar la punta
-     g.drawLine (p1.x,p1.y,point.x,point.y);
-     g.drawLine (p2.x,p2.y,point.x,point.y);
+        tx=(point1.x-point2.x)*1.0;
+        ang=Math.atan (ty/tx);
+        if(tx<0)
+        {// si tx es negativo aumentar 180 grados
+           ang+=Math.PI;
+        }
+        //puntos de control para la punta
+        //p1 y p2 son los puntos de salida
+        Point p1=new Point(),p2=new Point(),point=point2;
+        //angulo de separacion
+        angSep=25.0;
+        p1.x=(int)(point.x+dist*Math.cos (ang-Math.toRadians (angSep)));
+        p1.y=(int)(point.y-dist*Math.sin (ang-Math.toRadians (angSep)));
+        p2.x=(int)(point.x+dist*Math.cos (ang+Math.toRadians (angSep)));
+        p2.y=(int)(point.y-dist*Math.sin (ang+Math.toRadians (angSep)));
+        Graphics2D g2D=(Graphics2D)g;
+        //dale color a la linea
+        g.setColor (Color.red);
+        // grosor de la linea
+        g2D.setStroke (new BasicStroke(2.5f));
+        //dibuja la linea de extremo a extremo
+        g.drawLine (point1.x,point1.y,point.x,point.y);
+        //dibujar la punta
+        g.drawLine (p1.x,p1.y,point.x,point.y);
+        g.drawLine (p2.x,p2.y,point.x,point.y);
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", 2,18));
+        g.drawString("" + getConnection(i).getDistance(), xs, ys);
     }
     
-    public void paint(JPanel panel){
+    public void paint(Graphics g){
         if (counter==0) {
-            paintRedNode(panel);
+            paintRedNode(g);
         }else {
-            paintRedNode(panel);
+            paintRedNode(g);
             for (int i = 0; i < size; i++) {
                 if (getConnection(i)!=null) {
-                    paintRedArrow(panel, i);
+                    paintRedArrow(g, i);
                 }
             }
         }
