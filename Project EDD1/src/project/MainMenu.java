@@ -5,7 +5,9 @@
  */
 package project;
 
+import BicolorableGraph.BicoloreablePanel;
 import Dijkstra.PanelDijkstra;
+import Huffman.HuffManPanel;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import PerformanceEvaluation.PanelEvaluation;
@@ -25,6 +27,8 @@ public class MainMenu extends javax.swing.JFrame {
     
     private PanelEvaluation panel_evaluation;
     private PanelDijkstra panel_dijkstra;
+    private HuffManPanel panel_huffman;
+    private BicoloreablePanel panel_bicorolable;
 
     
     //Constructor
@@ -79,9 +83,9 @@ public class MainMenu extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        bicolorableGraphButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        huffmanButton = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         performanceEvaluationButton = new javax.swing.JButton();
@@ -104,11 +108,21 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton1");
+        bicolorableGraphButton.setText("grafo bi-coloreable");
+        bicolorableGraphButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bicolorableGraphButtonActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("jButton1");
 
-        jButton4.setText("jButton1");
+        huffmanButton.setText("Compresor de Archivos de Texto");
+        huffmanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                huffmanButtonActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("jButton1");
 
@@ -135,11 +149,11 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(450, 450, 450)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(huffmanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(bicolorableGraphButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(450, 450, 450)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,9 +171,9 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(huffmanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bicolorableGraphButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,7 +231,18 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_performanceEvaluationButtonActionPerformed
 
     private void jMenuItemComebackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemComebackActionPerformed
-        panel_evaluation = null;
+        if (panel_evaluation!=null) {
+            panel_evaluation = null;
+        }
+        if (panel_dijkstra!=null) {
+            panel_dijkstra = null;
+        }
+        if (panel_huffman!=null) {
+            panel_huffman = null;
+        }
+        if (panel_bicorolable!=null) {
+            panel_bicorolable = null;
+        }
         addPanel(mainPanel);
         jMenuItemComeback.setEnabled(false);
     }//GEN-LAST:event_jMenuItemComebackActionPerformed
@@ -226,6 +251,16 @@ public class MainMenu extends javax.swing.JFrame {
         panel_dijkstra = new PanelDijkstra();
         addPanel(panel_dijkstra);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void huffmanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_huffmanButtonActionPerformed
+        panel_huffman = new HuffManPanel();
+        addPanel(panel_huffman);
+    }//GEN-LAST:event_huffmanButtonActionPerformed
+
+    private void bicolorableGraphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bicolorableGraphButtonActionPerformed
+        panel_bicorolable = new BicoloreablePanel();
+        addPanel(panel_bicorolable);
+    }//GEN-LAST:event_bicolorableGraphButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,11 +296,11 @@ public class MainMenu extends javax.swing.JFrame {
     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bicolorableGraphButton;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton huffmanButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;

@@ -99,11 +99,11 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="450" pref="450" max="-2" attributes="0"/>
-                      <Component id="jButton4" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="huffmanButton" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
                       <Component id="jButton6" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="bicolorableGraphButton" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="450" pref="450" max="-2" attributes="0"/>
@@ -125,9 +125,9 @@
                       </Group>
                       <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton4" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="huffmanButton" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jButton6" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="bicolorableGraphButton" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -157,20 +157,26 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="bicolorableGraphButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton1"/>
+                <Property name="text" type="java.lang.String" value="grafo bi-coloreable"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bicolorableGraphButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jButton1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton4">
+            <Component class="javax.swing.JButton" name="huffmanButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton1"/>
+                <Property name="text" type="java.lang.String" value="Compresor de Archivos de Texto"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="huffmanButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton5">
               <Properties>
