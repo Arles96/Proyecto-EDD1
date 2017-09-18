@@ -4,67 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Minimal {
-    
-    public static void main(String[] args){
-        Graph graph = new Graph(7, true);
-        Graph graph2 = new Graph(4, true);
-        
-        graph.setNode("A", 0);
-        graph.setNode("B", 1);
-        graph.setNode("C", 2);
-        graph.setNode("D", 3);
-        graph.setNode("E", 4);
-        graph.setNode("F", 5);
-        graph.setNode("G", 6);
-        
-        graph.setNodeConection(0, 1, 2);
-        graph.setNodeConection(0, 2, 3);
-        graph.setNodeConection(0, 3, 3);
-        //graph.setNodeConection(0, 4, 1000000);
-        //graph.setNodeConection(0, 5, 1000000);
-        //graph.setNodeConection(0, 6, 1000000);
-        graph.setNodeConection(1, 2, 4);
-        //graph.setNodeConection(1, 3, 1000000);
-        graph.setNodeConection(1, 4, 3);
-        //graph.setNodeConection(1, 5, 1000000);
-        //graph.setNodeConection(1, 6, 1000000);
-        //graph.setNodeConection(2, 3, 1000000);
-        graph.setNodeConection(2, 4, 1);
-        graph.setNodeConection(2, 5, 6);
-        //graph.setNodeConection(2, 6, 1000000);
-        //graph.setNodeConection(3, 4, 1000000);
-        graph.setNodeConection(3, 5, 7);
-        //graph.setNodeConection(3, 6, 1000000);
-        graph.setNodeConection(4, 5, 8);
-        //graph.setNodeConection(4, 6, 1000000);
-        graph.setNodeConection(5, 6, 9);
-        
-        graph2.setNode("A", 0);
-        graph2.setNode("B", 1);
-        graph2.setNode("C", 2);
-        graph2.setNode("D", 3);
-        
-        graph2.setNodeConection(0, 1, 1);
-        graph2.setNodeConection(0, 3, 2);
-        graph2.setNodeConection(1, 2, 4);
-        graph2.setNodeConection(1, 3, 3);
-        graph2.setNodeConection(2, 3, 5);
-        
-        
-        System.out.println("Kruskal:");
-        printTree(Kruskal(graph), "");
-        printTree(Kruskal(graph2), "");
-        System.out.println(graph);
-        System.out.println(graph2);
-        
-        
-        System.out.println("Prim:");
-        printTree(Prim(graph), "");
-        printTree(Prim(graph2), "");
-        System.out.println(graph);
-        System.out.println(graph2);
-    }
-    
     public static void printList(ArrayList<int[]> list){
         for (int i = 0; i < list.size(); i++) {
             System.out.println(Arrays.toString(list.get(i)));
@@ -126,9 +65,9 @@ public class Minimal {
         ArrayList<Object> solution = new ArrayList();
         solution.add(0);
         while(solution.size() < graph.getSize()){
-            int[] least = new int[]{0, 0, 1000000};
+            int[] least = new int[]{0, 0, 9999999};
             for (Object sol : solution) {
-                for (int i = (int)sol + 1; i < graph.getSize(); i++) {
+                for (int i = 1; i < graph.getSize(); i++) {
                     if (graph.getMatrix((int)sol, i) < least[2] && solution.indexOf(i) < 0){
                         least[0] = (int)sol;
                         least[1] = i;

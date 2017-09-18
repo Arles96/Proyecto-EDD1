@@ -31,7 +31,7 @@ public class Graph extends AbstractGraph{
         if(infinite)
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-                    matrix[i][j] = 0x0fffffff;
+                    matrix[i][j] = 69905;
                 }
             }
     }
