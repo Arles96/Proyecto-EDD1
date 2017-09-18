@@ -55,10 +55,6 @@ public class GraphDijkstra extends AbstractGraph {
         this.counter = counter;
     }
 
-    public Node[] getSolution() {
-        return solution;
-    }
-
     public void setSolution(Node[] solution) {
         this.solution = solution;
     }
@@ -129,55 +125,59 @@ public class GraphDijkstra extends AbstractGraph {
     
     
     //TODO: Terminar este algoritmo
-    private void path(Node[] list){
-        Node temporal = null;
-        for (int i = 0; i < size; i++) {
-            int less = 0;    
+    private void path(Node[] list, Node node){        
+        for (int i = 0; i < counter; i++) {
+            if (list[i]!=null) {
+                list[i].setAccumulator(node.getDistance(i));
+                System.out.println(list[i].getAccumulator());
+            }
+        }
+        for (int i = 0; i < counter; i++) {
+            int less = 0;
             int index = -1;
-            if (temporal==null) {
-                for (int j = 0; j < list.length; j++) {
-                    if (list[j].getConnection(j)!= null && less==0) {
-                        less = list[j].getConnection(j).getAccumulator();
-                        temporal = list[i].getConnection(j);
-                        index = j;
-                    }
-                    if (less!=0 && less>list[j].getAccumulator()) {
+            boolean checker = false;
+            for (int j = 0; j < counter; j++) {
+                if (list[j]!=null && j!=node.getVertex()-1) {
+                    if (!checker) {
                         less = list[j].getAccumulator();
-                        temporal = list[j].getConnection(j);
+                        index = j;
+                        checker = true;
+                    }
+                    if (less>list[j].getAccumulator() && !list[j].isSolution()) {
+                        less=list[j].getAccumulator();
                         index = j;
                     }
-                }
-            }else {
-                for (int j = 0; j < size; j++) {
-                    if (list[j]==null && solution[i-1].getConnection(j)!=null) {
-                        solution[i-1].getConnection(j).setAccumulator(solution[i-1].getAccumulator() + 
-                                solution[i-1].getConnection(j).getAccumulator());
-                        list[j] = solution[i-1].getConnection(j);
+                }else {
+                    if (i>0 && node.getVertex()!=j) {
+                        if (solution[i-1].getConnection(j)!=null) {
+                            list[j] = solution[i-1].getConnection(j);
+                            int accumulator = list[j].getAccumulator() + list[j].getDistance(j);
+                            list[j].setAccumulator(accumulator);
+                            if (!checker) {
+                                less = list[i].getAccumulator();
+                                checker = true;
+                                index = j;
+                            }else {
+                                if (less>list[j].getAccumulator() && !list[j].isSolution()) {
+                                    less=list[j].getAccumulator();
+                                    index = j;
+                                }
+                            }
+                        }
                     }
-                    if (list[j].getConnection(j)!= null && less==0 && !list[j].isSolution()) {
-                        less = list[j].getConnection(j).getAccumulator();
-                        temporal = list[i].getConnection(j);
-                        index = j;
-                    }
-                    if (less!=0 && less>list[j].getAccumulator() && !list[i].isSolution()) {
-                        less = list[j].getAccumulator();
-                        temporal = list[j].getConnection(j);
-                        index = j;  
-                    }
-                    
                 }
             }
-            if (temporal!=null && index!=-1) {
+            if (index>-1) {
                 list[index].setSolution(true);
-                //temporal.setSolution(true);
-                solution[i] = temporal;
-            } 
-        }      
+                solution[i] = list[index];
+            }
+        }
     }
     
-    public void dijkstra(Node node){
+    public Node[] dijkstra(Node node){
         Node [] list = node.getConnections();
-        path(list);
+        path(list,node);
+        return solution;
     }
     
     

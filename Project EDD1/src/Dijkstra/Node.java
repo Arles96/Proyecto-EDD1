@@ -25,29 +25,15 @@ public class Node {
     private int vertex;
     private int x;
     private int y;
-    private int distance;
     private int size;
     private int accumulator;
     private boolean solution;
     private Node [] connections;
+    private int [] distances;
     private int counter = 0;
     public static final int DIAMETER = 40;
 
     //Constructor
-
-    public Node(int vertex, int size) {
-        this.vertex = vertex;
-        this.size = size;
-        connections = new Node[this.size];
-        this.solution = false;
-        accumulator = 0;
-    }
-
-    public Node(int vertex) {
-        this.vertex = vertex;
-        this.solution = false;
-        accumulator = 0;
-    }   
 
     public Node(int vertex, int x, int y, int size) {
         this.vertex = vertex;
@@ -55,6 +41,7 @@ public class Node {
         this.y = y;
         this.size = size;
         this.connections = new Node[this.size];
+        this.distances = new int [this.size];
     }
     
     //getter and setter
@@ -65,17 +52,6 @@ public class Node {
 
     public void setVertex(int vertex) {
         this.vertex = vertex;
-    }
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public void setDistance(int distance) {
-        this.distance = distance;
-        if (accumulator==0) {
-            setAccumulator(distance);
-        }
     }
 
     public int getSize() {
@@ -133,14 +109,25 @@ public class Node {
     public void setCounter(int counter) {
         this.counter = counter;
     }
+
+    public int[] getDistances() {
+        return distances;
+    }
+
+    public void setDistances(int[] distances) {
+        this.distances = distances;
+    }
+    
+    public int getDistance(int index){
+        return distances[index];
+    }
     
     //administration methods
     
     public void addConnection(Node node, int distance){
         if (connections[node.getVertex()-1]==null) {
-            node.setDistance(distance);
+            distances[node.getVertex()-1] = distance;
             connections[node.getVertex()-1] = node;
-            System.out.println(connections[node.getVertex()-1].getVertex());
             counter++;
         }else {
             JOptionPane.showMessageDialog(null, "Ya existe una conexión.");
@@ -149,6 +136,7 @@ public class Node {
     
     public void removeConnection(Node node){
         if (connections[node.getVertex()-1]!=null) {
+            distances[node.getVertex()-1] = 0;
             connections[node.getVertex()-1] = null;
             counter--;
         }
@@ -293,7 +281,7 @@ public class Node {
         g.drawLine (p2.x,p2.y,point.x,point.y);
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", 2,18));
-        g.drawString("" + getConnection(i).getDistance(), xs, ys);
+        g.drawString("" + distances[i], xs, ys);
     }
     
     public void paint(Graphics g){

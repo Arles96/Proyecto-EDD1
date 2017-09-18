@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class PanelDijkstra extends javax.swing.JPanel {
     
-    // Atributes
+    // TODO: Corregir el algoritmo de dijkstra y al agregar una conexion
 
     //Constructor
     public PanelDijkstra() {
@@ -42,8 +42,17 @@ public class PanelDijkstra extends javax.swing.JPanel {
         nodeList3.setModel(canvasPanel.getModel());
     }
     
-    private void textDijkstra(){
-        
+    private void textDijkstra(Node[] list, Node node){
+        String text = "Nodo seleccionado: Nodo " + node.toString() + "\n\n";
+        for (int i = 0; i < list.length; i++) {
+            if (list[i]!=null) {
+                /*if (i==0) {
+                    text+= "Acumulador: " + 0 + " nodo " + list[i].toString() + "\n";
+                }*/
+                text += "Acumulador: " + list[i].getAccumulator() + " nodo " + list[i].toString() + "\n";
+            }
+        }
+        dijkstraTextField.setText(text);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,8 +137,10 @@ public class PanelDijkstra extends javax.swing.JPanel {
         subtittleLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         subtittleLabel2.setText("Node 2");
 
+        nodeList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane2.setViewportView(nodeList1);
 
+        nodeList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane3.setViewportView(nodeList2);
 
         connectionButton.setText("Conectar");
@@ -141,6 +152,8 @@ public class PanelDijkstra extends javax.swing.JPanel {
 
         tittleConnectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tittleConnectionLabel.setText("CONECTANDO NODOS");
+
+        distanceTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout jDialogConnectionLayout = new javax.swing.GroupLayout(jDialogConnection.getContentPane());
         jDialogConnection.getContentPane().setLayout(jDialogConnectionLayout);
@@ -155,13 +168,14 @@ public class PanelDijkstra extends javax.swing.JPanel {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(subtittleLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(connectionButton, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                             .addComponent(distanceTextField))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(subtittleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(subtittleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 24, Short.MAX_VALUE))))
         );
         jDialogConnectionLayout.setVerticalGroup(
             jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +184,9 @@ public class PanelDijkstra extends javax.swing.JPanel {
                 .addComponent(tittleConnectionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDialogConnectionLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
                     .addGroup(jDialogConnectionLayout.createSequentialGroup()
                         .addGroup(jDialogConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(subtittleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,17 +196,17 @@ public class PanelDijkstra extends javax.swing.JPanel {
                                 .addGap(30, 30, 30)
                                 .addComponent(distanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(98, 98, 98))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogConnectionLayout.createSequentialGroup()
+                                .addComponent(connectionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialogConnectionLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(14, 14, 14))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12))))
         );
 
         descriptionDijkstraLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         descriptionDijkstraLabel.setText("Seleccione un nodo de origen.");
 
+        nodeList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane4.setViewportView(nodeList3);
 
         doDijkstraButton.setText("Realizar");
@@ -205,30 +221,27 @@ public class PanelDijkstra extends javax.swing.JPanel {
         jDialogDijkstraLayout.setHorizontalGroup(
             jDialogDijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogDijkstraLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jDialogDijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(descriptionDijkstraLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                     .addGroup(jDialogDijkstraLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(descriptionDijkstraLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jDialogDijkstraLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addGroup(jDialogDijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(doDijkstraButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jDialogDijkstraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(doDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialogDijkstraLayout.setVerticalGroup(
             jDialogDijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogDijkstraLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(descriptionDijkstraLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(doDijkstraButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         setBackground(new java.awt.Color(146, 146, 210));
@@ -319,6 +332,7 @@ public class PanelDijkstra extends javax.swing.JPanel {
         );
 
         dijkstraTextField.setColumns(20);
+        dijkstraTextField.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         dijkstraTextField.setRows(5);
         dijkstraTextField.setEnabled(false);
         jScrollPane1.setViewportView(dijkstraTextField);
@@ -437,6 +451,7 @@ public class PanelDijkstra extends javax.swing.JPanel {
                     closedJDialog(jDialogConnection);
                     canvasPanel.repaint();
                     JOptionPane.showMessageDialog(this, "Se ha realizado una conexión");
+                    distanceTextField.setText("");
                 }
             }
         }else {
@@ -464,8 +479,9 @@ public class PanelDijkstra extends javax.swing.JPanel {
 
     private void doDijkstraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doDijkstraButtonActionPerformed
         if (nodeList3.getSelectedIndex()>-1) {
-            Node node = (Node) canvasPanel.getModel().get(nodeList3.getSelectedIndex());
-            canvasPanel.getGraph().dijkstra(node);
+            Node node = (Node) canvasPanel.getModel().get(nodeList3.getSelectedIndex());            
+            textDijkstra(canvasPanel.getGraph().dijkstra(node), node);
+            closedJDialog(jDialogDijkstra);
         }else {
             JOptionPane.showMessageDialog(this, "No seleccionaste ningún nodo de "
                 + "de origen.");
