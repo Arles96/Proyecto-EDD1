@@ -16,7 +16,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
+import math.Interfase;
 /**
  *
  * @author arles96
@@ -29,6 +29,7 @@ public class MainMenu extends javax.swing.JFrame {
     private PanelDijkstra panel_dijkstra;
     private HuffManPanel panel_huffman;
     private BicoloreablePanel panel_bicorolable;
+    private Interfase math;
 
     
     //Constructor
@@ -124,7 +125,12 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("jButton1");
+        jButton5.setText("Expresiones Matemáticas");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("jButton1");
 
@@ -261,6 +267,11 @@ public class MainMenu extends javax.swing.JFrame {
         panel_bicorolable = new BicoloreablePanel();
         addPanel(panel_bicorolable);
     }//GEN-LAST:event_bicolorableGraphButtonActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        math = new Interfase();
+        addPanel(math);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
