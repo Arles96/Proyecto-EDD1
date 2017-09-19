@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class PanelDijkstra extends javax.swing.JPanel {
     
-    // TODO: Corregir el algoritmo de dijkstra y al agregar una conexion
+    // TODO: "pintar los nodos de dijkstra"
 
     //Constructor
     public PanelDijkstra() {
@@ -40,15 +40,15 @@ public class PanelDijkstra extends javax.swing.JPanel {
         nodeList1.setModel(canvasPanel.getModel());
         nodeList2.setModel(canvasPanel.getModel());
         nodeList3.setModel(canvasPanel.getModel());
+        jDialogConnection.setResizable(false);
+        jDialogDijkstra.setResizable(false);
+        jDialogSize.setResizable(false);
     }
     
     private void textDijkstra(Node[] list, Node node){
         String text = "Nodo seleccionado: Nodo " + node.toString() + "\n\n";
-        for (int i = 0; i < list.length; i++) {
+        for (int i = 0; i < canvasPanel.getGraph().getCounter(); i++) {
             if (list[i]!=null) {
-                /*if (i==0) {
-                    text+= "Acumulador: " + 0 + " nodo " + list[i].toString() + "\n";
-                }*/
                 text += "Acumulador: " + list[i].getAccumulator() + " nodo " + list[i].toString() + "\n";
             }
         }
@@ -468,7 +468,6 @@ public class PanelDijkstra extends javax.swing.JPanel {
             canvasPanel.getGraph().remove(node);
             canvasPanel.getModel().remove(number);
             canvasPanel.setCounter(canvasPanel.getCounter()-1);
-            JOptionPane.showMessageDialog(this, "Se ha eliminado el ultimo nodo ingresado.");
             canvasPanel.repaint();
         }
     }//GEN-LAST:event_removeButtonActionPerformed
@@ -482,6 +481,7 @@ public class PanelDijkstra extends javax.swing.JPanel {
             Node node = (Node) canvasPanel.getModel().get(nodeList3.getSelectedIndex());            
             textDijkstra(canvasPanel.getGraph().dijkstra(node), node);
             closedJDialog(jDialogDijkstra);
+            canvasPanel.repaint();
         }else {
             JOptionPane.showMessageDialog(this, "No seleccionaste ningún nodo de "
                 + "de origen.");

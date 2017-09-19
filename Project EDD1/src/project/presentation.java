@@ -5,6 +5,8 @@
  */
 package project;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author arles96
@@ -30,6 +32,7 @@ public class presentation extends javax.swing.JFrame {
         thread = new PresentationThread(progress);
         thread.start();
         thread = null;
+        setIconImage(new ImageIcon(getClass().getResource("../img/logo.jpg")).getImage());  
     }
 
     /**

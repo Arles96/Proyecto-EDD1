@@ -12,7 +12,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -173,81 +172,95 @@ public class Node {
         return "" + vertex;
     }
     
-    private void paintRedNode(Graphics g){
-        g.setColor(Color.red);
+    private void paintNode(Graphics g, Color color){
+        g.setColor(color);
         g.fillOval(x-DIAMETER/2, y-DIAMETER/2, DIAMETER, DIAMETER);
         g.setColor(Color.white);
         g.setFont(new Font("Arial", Font.BOLD, 12));
         g.drawString("" + vertex, x, y);
     }
     
-    private void paintRedArrow(Graphics g, int i){
+    private void paintArrow(Graphics g, int i, Color color){
         double ang, angSep;
         double tx,ty;
-        int dist;
-        int x2,y2;
-        int x3, y3;
-        int xs, ys;
+        int x2=0, y2=0, x3=0, y3=0, xs=0, ys=0, dist;
+        int space = 20;
         int r = DIAMETER/2;
         if (x+r<getConnection(i).getX() && y+r<getConnection(i).getY()) {
+            System.out.println(1);
             x2 = getConnection(i).getX()-r;
             y2 = getConnection(i).getY() - r/2;
             x3 = x + r;
             y3 = y + r/2;
-            xs = (x2-x3)/2  + x3;
+            xs = (x2-x3)/2  + x3 + space;
             ys = (y2-y3)/2 + y3;
-        }else if (x-r>getConnection(i).getX() && y+r>getConnection(i).getY()) {
+        }
+        if (x-r>getConnection(i).getX() && y+r>getConnection(i).getY()) {
+            System.out.println("2");
             x2 = getConnection(i).getX() + r ;
             y2 = getConnection(i).getY() + r/2;
             x3 = x - r;
             y3 = y - r/2;
-            xs = (x3-x2)/2  + x2;
+            xs = (x3-x2)/2  + x2 + space;
             ys = (y3-y2)/2 + y2;
-        }else if (x-r>getConnection(i).getX() && y+r<getConnection(i).getY()) {
+        }
+        if (x-r>getConnection(i).getX() && y+r<getConnection(i).getY()) {
+            System.out.println("3");
             x2 = getConnection(i).getX() + r;
             y2 = getConnection(i).getY() - r/2;
             x3 = x - r;
             y3 = y + r/2;
-            xs = (x3-x2)/2 + x2;
+            xs = (x3-x2)/2 + x2 - space;
             ys = (y2-y3)/2 + y3;
-        }else if (x+r<getConnection(i).getX() && y-r>getConnection(i).getY()) {
+        }
+        if (x+r<getConnection(i).getX() && y-r>getConnection(i).getY()) {
+            System.out.println("4");
             x2 = getConnection(i).getX() - r;
             y2 = getConnection(i).getY() + r/2;
             x3 = x + r;
             y3 = y - r/2;
-            xs = (x2-x3)/2 + x3;
+            xs = (x2-x3)/2 + x3 - space;
             ys = (y3-y2)/2 + y2;
-        }else if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
+        }
+        if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
                 && y+r<getConnection(i).getY()) {
+            System.out.println("5");
             x2 = getConnection(i).getX();
             y2 = getConnection(i).getY() - r;
             x3 = x;
             y3 = y + r;
-            xs = x3 - 15;
-            ys = (y2-y3)/2 + y3;
-        }else if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
+            xs = x3 - space;
+            ys = (y2-y3)/2 + y3 + space;
+        }
+        if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
                 && y-r>getConnection(i).getY()) {
+            System.out.println("6");
             x2 = getConnection(i).getX();
             y2 = getConnection(i).getY() + r;
             x3 = x;
             y3 = y - r;
-            xs = x2 + 15;
+            xs = x2 + space;
             ys = (y3-y2)/2 + y2;
-        }else if (y+r>getConnection(i).getY() && y-r<getConnection(i).getY()
+        }
+        if (y+r>getConnection(i).getY() && y-r<getConnection(i).getY()
                 && x+r<getConnection(i).getX()) {
+            System.out.println("7");
             y2 = getConnection(i).getY();
             x2 = getConnection(i).getX() - r;
             y3 = y;
             x3 = x + r;
             xs = (x2-x3)/2 + x3;
-            ys = y3 + 10;
-        }else {
+            ys = y3 + space;
+        } 
+        if (y+r>getConnection(i).getY() && y-r<getConnection(i).getY()
+                && x+r>getConnection(i).getX()) {
+            System.out.println("8");
             y2 = getConnection(i).getY();
             x2 = getConnection(i).getX() + r;
             y3 = y;
             x3 = x - r;
             xs = (x3-x2)/2 + x2;
-            ys = y2 - 10;
+            ys = y2 - space;
         }
         Point point1,point2;
         point1=new Point(x3,y3);
@@ -271,7 +284,7 @@ public class Node {
         p2.y=(int)(point.y-dist*Math.sin (ang+Math.toRadians (angSep)));
         Graphics2D g2D=(Graphics2D)g;
         //dale color a la linea
-        g.setColor (Color.red);
+        g.setColor (color);
         // grosor de la linea
         g2D.setStroke (new BasicStroke(2.5f));
         //dibuja la linea de extremo a extremo
@@ -286,12 +299,27 @@ public class Node {
     
     public void paint(Graphics g){
         if (counter==0) {
-            paintRedNode(g);
+            if (this.isSolution()) {
+                paintNode(g, Color.RED);
+                this.setSolution(false);
+            }else {
+                paintNode(g, Color.RED);
+            }
         }else {
-            paintRedNode(g);
+            if (this.isSolution()) {
+                paintNode(g, Color.RED);
+                this.setSolution(false);
+            }else {
+                paintNode(g, Color.RED);
+            }
             for (int i = 0; i < size; i++) {
                 if (getConnection(i)!=null) {
-                    paintRedArrow(g, i);
+                    if (getConnection(i).isSolution()) {
+                        paintArrow(g, i, Color.RED);
+                        getConnection(i).setSolution(false);
+                    }else {
+                        paintArrow(g, i, Color.RED);
+                    }
                 }
             }
         }

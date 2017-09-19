@@ -29,7 +29,7 @@ public class MainMenu extends javax.swing.JFrame {
     private PanelDijkstra panel_dijkstra;
     private HuffManPanel panel_huffman;
     private BicoloreablePanel panel_bicorolable;
-    private Interfase math;
+    private Interfase panel_math;
 
     
     //Constructor
@@ -45,6 +45,18 @@ public class MainMenu extends javax.swing.JFrame {
     public void paint(Graphics g){
         super.paint(g);
         if (panel_dijkstra!=null) {
+            panel_dijkstra.setSize(this.getWidth(), this.getHeight());
+        }
+        if (panel_bicorolable!=null) {
+            panel_bicorolable.setSize(this.getWidth(), this.getHeight());
+        }
+        if (panel_evaluation!=null) {
+            panel_evaluation.setSize(this.getWidth(), this.getHeight());
+        }if (panel_huffman!=null) {
+            panel_huffman.setSize(this.getWidth(), this.getHeight());
+        }
+        if (panel_math!=null) {
+            panel_math.setSize(this.getWidth(), this.getHeight());
         }
     }
     
@@ -269,8 +281,8 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_bicolorableGraphButtonActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        math = new Interfase();
-        addPanel(math);
+        panel_math = new Interfase();
+        addPanel(panel_math);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

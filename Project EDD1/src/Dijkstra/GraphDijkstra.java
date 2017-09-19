@@ -26,7 +26,7 @@ public class GraphDijkstra extends AbstractGraph {
         this.size = size;
         counter = 0;
         nodes = new Node[this.size];
-        solution = new Node[this.size];
+        //solution = new Node[this.size];
     }
     
     //getter ande setter
@@ -123,44 +123,59 @@ public class GraphDijkstra extends AbstractGraph {
         }
     }
     
-    
-    //TODO: Terminar este algoritmo
+    // private method for dijkstra
     private void path(Node[] list, Node node){        
         for (int i = 0; i < counter; i++) {
             if (list[i]!=null) {
                 list[i].setAccumulator(node.getDistance(i));
-                System.out.println(list[i].getAccumulator());
             }
         }
-        for (int i = 0; i < counter; i++) {
+        for (int i = 1; i < counter; i++) {
             int less = 0;
             int index = -1;
             boolean checker = false;
             for (int j = 0; j < counter; j++) {
                 if (list[j]!=null && j!=node.getVertex()-1) {
-                    if (!checker) {
+                    if (!checker && !list[j].isSolution()) {
                         less = list[j].getAccumulator();
                         index = j;
                         checker = true;
                     }
-                    if (less>list[j].getAccumulator() && !list[j].isSolution()) {
-                        less=list[j].getAccumulator();
-                        index = j;
+                    if (list[j].getAccumulator()!=0) {
+                        if (less>list[j].getAccumulator() && !list[j].isSolution()) {
+                            less = list[j].getAccumulator();
+                            index = j;
+                        }
+                    }
+                    if (i>1) {
+                        if (solution[i-1].getConnection(j)!=null) {
+                            int accumulator = solution[i-1].getAccumulator() + solution[i-1].getDistance(j);
+                            if (accumulator<list[j].getAccumulator()) {
+                                list[j] = solution[i-1].getConnection(j);
+                                list[j].setAccumulator(accumulator);
+                                if (less>list[j].getAccumulator()) {
+                                    less = list[j].getAccumulator();
+                                    index = j;
+                                }
+                            }
+                        }
                     }
                 }else {
-                    if (i>0 && node.getVertex()!=j) {
+                    if (i>1 && node.getVertex()!=j) {
                         if (solution[i-1].getConnection(j)!=null) {
                             list[j] = solution[i-1].getConnection(j);
-                            int accumulator = list[j].getAccumulator() + list[j].getDistance(j);
+                            int accumulator = solution[i-1].getAccumulator() + solution[i-1].getDistance(j);
                             list[j].setAccumulator(accumulator);
                             if (!checker) {
-                                less = list[i].getAccumulator();
+                                less = list[j].getAccumulator();
                                 checker = true;
                                 index = j;
                             }else {
-                                if (less>list[j].getAccumulator() && !list[j].isSolution()) {
-                                    less=list[j].getAccumulator();
-                                    index = j;
+                                if (list[j].getAccumulator()!=0) {
+                                    if (less>list[j].getAccumulator() && !list[j].isSolution()) {
+                                        less=list[j].getAccumulator();
+                                        index = j;
+                                    }
                                 }
                             }
                         }
@@ -170,17 +185,39 @@ public class GraphDijkstra extends AbstractGraph {
             if (index>-1) {
                 list[index].setSolution(true);
                 solution[i] = list[index];
+            }else {
+                break;
             }
         }
     }
     
     public Node[] dijkstra(Node node){
-        Node [] list = node.getConnections();
+        Node [] list = node.getConnections().clone();
+        solution = new Node[size];
+        solution[0] = node;
+        solution[0].setAccumulator(0);
         path(list,node);
         return solution;
     }
     
+    public boolean isOccupied(int x, int y){
+        for (int i = 0; i < counter; i++) {
+            if (x>nodes[i].getX()-Node.DIAMETER && x<nodes[i].getX()+Node.DIAMETER 
+                    && y>nodes[i].getY()-Node.DIAMETER && y<nodes[i].getY() + Node.DIAMETER) {
+                return true;
+            }
+        }
+        return false;
+    }
     
-    
+    public Node getGraphicNode(int x, int y){
+        for (int i = 0; i < counter; i++) {
+             if (x>nodes[i].getX()-Node.DIAMETER && x<nodes[i].getX()+Node.DIAMETER 
+                    && y>nodes[i].getY()-Node.DIAMETER && y<nodes[i].getY() + Node.DIAMETER) {
+                return nodes[i];
+            }
+        }
+        return null;
+    }
     
 }
