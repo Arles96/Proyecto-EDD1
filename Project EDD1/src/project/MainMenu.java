@@ -30,7 +30,7 @@ public class MainMenu extends javax.swing.JFrame {
     private HuffManPanel panel_huffman;
     private BicoloreablePanel panel_bicorolable;
     private Interfase panel_math;
-
+    
     
     //Constructor
     
@@ -58,6 +58,7 @@ public class MainMenu extends javax.swing.JFrame {
         if (panel_math!=null) {
             panel_math.setSize(this.getWidth(), this.getHeight());
         }
+        mainPanel.setSize(this.getWidth(), this.getHeight());
     }
     
     private void configurations(){
@@ -105,7 +106,6 @@ public class MainMenu extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemComeback = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1261, 638));
@@ -224,9 +224,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Editar");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,7 +325,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemComeback;
     private javax.swing.JPanel mainPanel;

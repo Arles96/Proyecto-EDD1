@@ -45,6 +45,14 @@ public class GraphDijkstra extends AbstractGraph {
 
     public void setSize(int size) {
         this.size = size;
+        Node [] temporal = nodes;
+        nodes = new Node[this.size];
+        for (int i = 0; i < counter; i++) {
+            nodes[i] = temporal[i];
+            if (nodes[i]!=null) {
+                nodes[i].setSize(size);
+            }
+        }
     }
 
     public int getCounter() {

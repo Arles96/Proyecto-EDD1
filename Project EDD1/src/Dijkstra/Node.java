@@ -11,7 +11,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.Random;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -43,6 +45,16 @@ public class Node {
         this.distances = new int [this.size];
     }
     
+    public Node(int vertex, int size, JPanel panel){
+        this.size = size;
+        this.vertex = vertex;
+        Random random = new Random();
+        this.x = random.nextInt(panel.getWidth());
+        this.y = random.nextInt(panel.getHeight());
+        connections = new Node[this.size];
+        distances = new int[this.size];
+    }
+    
     //getter and setter
 
     public int getVertex() {
@@ -58,6 +70,14 @@ public class Node {
     }
 
     public void setSize(int size) {
+        Node [] temporal_connections = connections;
+        int [] temporal_distances = distances;
+        connections = new Node[size];
+        distances = new int[size];
+        for (int i = 0; i < this.size; i++) {
+            connections[i] = temporal_connections[i];
+            distances[i] = temporal_distances[i];
+        }
         this.size = size;
     }
 
@@ -187,7 +207,7 @@ public class Node {
         int space = 20;
         int r = DIAMETER/2;
         if (x+r<getConnection(i).getX() && y+r<getConnection(i).getY()) {
-            System.out.println(1);
+            //System.out.println(1);
             x2 = getConnection(i).getX()-r;
             y2 = getConnection(i).getY() - r/2;
             x3 = x + r;
@@ -196,7 +216,7 @@ public class Node {
             ys = (y2-y3)/2 + y3;
         }
         if (x-r>getConnection(i).getX() && y+r>getConnection(i).getY()) {
-            System.out.println("2");
+            //System.out.println("2");
             x2 = getConnection(i).getX() + r ;
             y2 = getConnection(i).getY() + r/2;
             x3 = x - r;
@@ -205,7 +225,7 @@ public class Node {
             ys = (y3-y2)/2 + y2;
         }
         if (x-r>getConnection(i).getX() && y+r<getConnection(i).getY()) {
-            System.out.println("3");
+            //System.out.println("3");
             x2 = getConnection(i).getX() + r;
             y2 = getConnection(i).getY() - r/2;
             x3 = x - r;
@@ -214,7 +234,7 @@ public class Node {
             ys = (y2-y3)/2 + y3;
         }
         if (x+r<getConnection(i).getX() && y-r>getConnection(i).getY()) {
-            System.out.println("4");
+            //System.out.println("4");
             x2 = getConnection(i).getX() - r;
             y2 = getConnection(i).getY() + r/2;
             x3 = x + r;
@@ -224,7 +244,7 @@ public class Node {
         }
         if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
                 && y+r<getConnection(i).getY()) {
-            System.out.println("5");
+            //System.out.println("5");
             x2 = getConnection(i).getX();
             y2 = getConnection(i).getY() - r;
             x3 = x;
@@ -234,7 +254,7 @@ public class Node {
         }
         if (x+r>getConnection(i).getX() && x-r<getConnection(i).getX()
                 && y-r>getConnection(i).getY()) {
-            System.out.println("6");
+            //System.out.println("6");
             x2 = getConnection(i).getX();
             y2 = getConnection(i).getY() + r;
             x3 = x;
@@ -244,7 +264,7 @@ public class Node {
         }
         if (y+r>getConnection(i).getY() && y-r<getConnection(i).getY()
                 && x+r<getConnection(i).getX()) {
-            System.out.println("7");
+            //System.out.println("7");
             y2 = getConnection(i).getY();
             x2 = getConnection(i).getX() - r;
             y3 = y;
@@ -254,7 +274,7 @@ public class Node {
         } 
         if (y+r>getConnection(i).getY() && y-r<getConnection(i).getY()
                 && x+r>getConnection(i).getX()) {
-            System.out.println("8");
+            //System.out.println("8");
             y2 = getConnection(i).getY();
             x2 = getConnection(i).getX() + r;
             y3 = y;

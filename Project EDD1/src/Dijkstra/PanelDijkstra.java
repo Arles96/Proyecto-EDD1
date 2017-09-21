@@ -5,8 +5,18 @@
  */
 package Dijkstra;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -15,6 +25,9 @@ import javax.swing.JOptionPane;
 public class PanelDijkstra extends javax.swing.JPanel {
     
     // TODO: "pintar los nodos de dijkstra"
+    //atribute
+    private File file;
+    
 
     //Constructor
     public PanelDijkstra() {
@@ -41,19 +54,45 @@ public class PanelDijkstra extends javax.swing.JPanel {
         nodeList2.setModel(canvasPanel.getModel());
         nodeList3.setModel(canvasPanel.getModel());
         jDialogConnection.setResizable(false);
+        jDialogConnection.setIconImage(new ImageIcon(getClass().getResource("../img/logo.jpg")).getImage());
         jDialogDijkstra.setResizable(false);
+        jDialogDijkstra.setIconImage(new ImageIcon(getClass().getResource("../img/logo.jpg")).getImage());
         jDialogSize.setResizable(false);
+        jDialogSize.setIconImage(new ImageIcon(getClass().getResource("../img/logo.jpg")).getImage());       
     }
     
     private void textDijkstra(Node[] list, Node node){
         String text = "Nodo seleccionado: Nodo " + node.toString() + "\n\n";
         for (int i = 0; i < canvasPanel.getGraph().getCounter(); i++) {
             if (list[i]!=null) {
-                text += "Acumulador: " + list[i].getAccumulator() + " nodo " + list[i].toString() + "\n";
+                text += "Acumulador: " + list[i].getAccumulator() + "| Noodo " + list[i].toString() + "\n";
             }
         }
         dijkstraTextField.setText(text);
     }
+    
+    private boolean writeFile(){
+        FileWriter fw;
+        BufferedWriter bw;
+         try {
+            fw = new FileWriter(file+".txt");
+            bw = new BufferedWriter(fw);
+            for (int i = 0; i < canvasPanel.getGraph().getCounter(); i++) {
+                if (canvasPanel.getGraph().getNode(i)!=null) {
+                    for (int j = 0; j < canvasPanel.getGraph().getCounter(); j++) {
+                        bw.write(canvasPanel.getGraph().getNode(i).getDistance(j)+ ",");
+                    }
+                    bw.newLine();
+                }
+            }
+            bw.flush();
+            JOptionPane.showMessageDialog(this, "Se ha guadado en un archivo de texto.");
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -274,6 +313,11 @@ public class PanelDijkstra extends javax.swing.JPanel {
         });
 
         saveButton.setText("Guardar");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         removeButton.setText("Eliminar");
         removeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -290,6 +334,11 @@ public class PanelDijkstra extends javax.swing.JPanel {
         });
 
         openFileButton.setText("Abrir Archivo");
+        openFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openFileButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -387,24 +436,41 @@ public class PanelDijkstra extends javax.swing.JPanel {
     }//GEN-LAST:event_sizeButtonActionPerformed
 
     private void acceptSizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptSizeButtonActionPerformed
-        int size;
-        try {
-            size = Integer.parseInt(sizeTextField.getText());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error, tiene que ser un numero.");
-            return;
-        }
-        if (size<=0) {
-            JOptionPane.showMessageDialog(this, "Error, el numero tiene que ser mayor que cero.");
-        }else if(size>0 && canvasPanel.getSizeGraph()==0){
-            canvasPanel.setSizeGraph(size);
-            JOptionPane.showMessageDialog(this, "Se ha ingresado con exito.");
-            sizeButton.setText("Modificar tamaño");
-            closedJDialog(jDialogSize);
+        if (canvasPanel.getSizeGraph()==0) {
+            int size;
+            try {
+                size = Integer.parseInt(sizeTextField.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error, tiene que ser un numero.");
+                return;
+            }
+            if (size<=0) {
+                JOptionPane.showMessageDialog(this, "Error, el numero tiene que ser mayor que cero.");
+            }else if(size>0 && canvasPanel.getSizeGraph()==0){
+                canvasPanel.setSizeGraph(size);
+                JOptionPane.showMessageDialog(this, "Se ha ingresado con exito.");
+                sizeButton.setText("Modificar tamaño");
+                closedJDialog(jDialogSize);
+            }else {
+                canvasPanel.setSizeGraph(size);
+                JOptionPane.showMessageDialog(this, "Se ha modificado con exito.");
+                closedJDialog(jDialogSize);
+            }
         }else {
-            canvasPanel.setSizeGraph(size);
-            JOptionPane.showMessageDialog(this, "Se ha modificado con exito.");
-            closedJDialog(jDialogSize);
+            int size;
+            try {
+                size = Integer.parseInt(sizeTextField.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error, tiene que ser un numero.");
+                return;
+            }
+            if (size<=canvasPanel.getSizeGraph()) {
+                JOptionPane.showMessageDialog(this, "Error, el numero tiene que ser mayor del que ingreso antes.");
+            }else {
+                canvasPanel.setSizeGraph(size);
+                JOptionPane.showMessageDialog(this, "Se ha modificado el numero maximo de nodos.");
+                closedJDialog(jDialogSize);
+            }
         }
     }//GEN-LAST:event_acceptSizeButtonActionPerformed
 
@@ -487,6 +553,73 @@ public class PanelDijkstra extends javax.swing.JPanel {
                 + "de origen.");
         }
     }//GEN-LAST:event_doDijkstraButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        if (file==null) {
+            JFileChooser jfc = new JFileChooser();
+            int selection = jfc.showSaveDialog(this);
+            if (selection==JFileChooser.APPROVE_OPTION) {
+                file = jfc.getSelectedFile();
+                if (writeFile()) {
+                    JOptionPane.showMessageDialog(this, "Se ha guardado en un archivo de texto.");
+                }else {
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar.");
+                }
+            }
+        }else {
+            if (writeFile()) {
+                JOptionPane.showMessageDialog(this, "Se ha guardado en el archivo " + file.getName() + ".");
+            }else {
+                JOptionPane.showMessageDialog(this, "Error al momento de guardar en el archivo " + file.getName() + ".");
+            }
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void openFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileButtonActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("file", "txt");
+        jfc.setFileFilter(filter);
+        BufferedReader br;
+        FileReader fr;
+        int selection = jfc.showOpenDialog(this);
+        ArrayList<String> lines = new ArrayList();
+        if (selection == JFileChooser.APPROVE_OPTION) {
+            file = jfc.getSelectedFile();
+            try {
+                fr = new FileReader(file);
+                br = new BufferedReader(fr);
+                String line;
+                while ((line=br.readLine())!=null){
+                    lines.add(line);
+                }
+                canvasPanel.setSizeGraph(lines.size());
+                for (int i = 0; i < lines.size(); i++) {
+                    Node node = new Node(i+1,lines.size(),canvasPanel);
+                    canvasPanel.getGraph().insert(node);
+                    canvasPanel.getModel().addElement(node);
+                }
+                for (int i = 0; i < lines.size(); i++) {
+                    int counter = -1;
+                    for (int j = 0; j < lines.get(i).length(); j++) {
+                        if (lines.get(i).charAt(j)!=',') {
+                            counter++;
+                        }
+                        if (lines.get(i).charAt(j)!='0' && lines.get(i).charAt(j)!=',' && counter!=-1) {
+                            int distance = Integer.parseInt("" + lines.get(i).charAt(j));
+                            canvasPanel.getGraph().makeConnection(canvasPanel.getGraph().getNode(i),
+                                    canvasPanel.getGraph().getNode(counter), distance);
+                        }
+                    }
+                }
+                canvasPanel.setCounter(lines.size()+1);
+                canvasPanel.repaint();
+                sizeTextField.setText("" + lines.size());
+                sizeButton.setText("Modificar Tamaño");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error al abrir el archivo " + file.getName() + "." );
+            }
+        }
+    }//GEN-LAST:event_openFileButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

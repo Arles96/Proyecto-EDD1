@@ -56,6 +56,9 @@ public class CanvasPanel extends javax.swing.JPanel {
         if (this.size==0) {
             this.size = size;
             graph = new GraphDijkstra(size);
+        }else {
+            this.size = size;
+            graph.setSize(size);
         }
     }
 
@@ -73,6 +76,14 @@ public class CanvasPanel extends javax.swing.JPanel {
 
     public void setModel(DefaultListModel model) {
         this.model = model;
+    }
+
+    public boolean isPressed() {
+        return pressed;
+    }
+
+    public void setPressed(boolean pressed) {
+        this.pressed = pressed;
     }
     
     //Administration Methods
