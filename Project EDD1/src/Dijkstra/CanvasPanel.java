@@ -26,6 +26,7 @@ public class CanvasPanel extends javax.swing.JPanel {
     private boolean pressed = false;
     
     //Constructor
+    
     public CanvasPanel() {
         initComponents();
     }
@@ -95,7 +96,6 @@ public class CanvasPanel extends javax.swing.JPanel {
             for (int i = 0; i < graph.getSize(); i++) {
                 for (int j = 0; j < 10; j++) {
                     if (graph.getNode(i)!=null) {
-                        //System.out.println(graph.getNode(i).isSolution());
                         graph.getNode(i).paint(g);
                     }
                 }
@@ -186,7 +186,6 @@ public class CanvasPanel extends javax.swing.JPanel {
             repaint();
         }
     }//GEN-LAST:event_formMouseDragged
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

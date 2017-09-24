@@ -85,26 +85,22 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="330" pref="330" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="960" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="450" pref="450" max="-2" attributes="0"/>
-                      <Component id="performanceEvaluationButton" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace min="340" pref="340" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="200" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="450" pref="450" max="-2" attributes="0"/>
-                      <Component id="huffmanButton" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
-                      <Component id="jButton6" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
-                      <Component id="bicolorableGraphButton" min="-2" pref="200" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="450" pref="450" max="-2" attributes="0"/>
-                      <Component id="jButton5" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace min="340" pref="340" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="performanceEvaluationButton" max="32767" attributes="0"/>
+                          <Component id="huffmanButton" alignment="0" pref="270" max="32767" attributes="0"/>
+                          <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jButton1" alignment="1" max="32767" attributes="0"/>
+                          <Component id="bicolorableGraphButton" alignment="1" pref="270" max="32767" attributes="0"/>
+                          <Component id="jButton3" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -119,10 +115,9 @@
                           <Component id="jButton1" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="huffmanButton" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="jButton6" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="bicolorableGraphButton" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="huffmanButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="bicolorableGraphButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -154,7 +149,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="bicolorableGraphButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="grafo bi-coloreable"/>
+                <Property name="text" type="java.lang.String" value="grafo bi-coloreable, Kruskal y Prim"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bicolorableGraphButtonActionPerformed"/>
@@ -180,11 +175,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton6">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jButton1"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="performanceEvaluationButton">
               <Properties>

@@ -31,6 +31,13 @@ public class Employee {
         this.id = id;
     }
 
+    public Employee(int index){
+        this.value = 0;
+        this.grade = this.value;
+        this.name = "Empleado"+index;
+        this.area = "Desconocido";
+        this.id = index;
+    }
     
     //getter and setter
 
@@ -40,6 +47,7 @@ public class Employee {
 
     public void setValue(int value) {
         this.value = value;
+        this.grade = value;
     }
 
     public String getName() {

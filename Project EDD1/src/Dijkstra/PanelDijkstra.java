@@ -65,7 +65,8 @@ public class PanelDijkstra extends javax.swing.JPanel {
         String text = "Nodo seleccionado: Nodo " + node.toString() + "\n\n";
         for (int i = 0; i < canvasPanel.getGraph().getCounter(); i++) {
             if (list[i]!=null) {
-                text += "Acumulador: " + list[i].getAccumulator() + "| Noodo " + list[i].toString() + "\n";
+                text += "Acumulador: " + list[i].getAccumulator() + " | Nodo " + 
+                        list[i].toString() + "\n";
             }
         }
         dijkstraTextField.setText(text);
@@ -86,7 +87,6 @@ public class PanelDijkstra extends javax.swing.JPanel {
                 }
             }
             bw.flush();
-            JOptionPane.showMessageDialog(this, "Se ha guadado en un archivo de texto.");
             return true;
         } catch (IOException e) {
             return false;
@@ -150,12 +150,12 @@ public class PanelDijkstra extends javax.swing.JPanel {
         jDialogSize.getContentPane().setLayout(jDialogSizeLayout);
         jDialogSizeLayout.setHorizontalGroup(
             jDialogSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialogSizeLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogSizeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jDialogSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(descriptionSizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                    .addComponent(sizeTextField)
-                    .addComponent(acceptSizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jDialogSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(acceptSizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(descriptionSizeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                    .addComponent(sizeTextField, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
         jDialogSizeLayout.setVerticalGroup(
@@ -166,8 +166,8 @@ public class PanelDijkstra extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(acceptSizeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(acceptSizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         subtittleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -361,7 +361,8 @@ public class PanelDijkstra extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)))
                 .addGap(40, 40, 40))
         );
         contentPanelLayout.setVerticalGroup(
@@ -394,7 +395,7 @@ public class PanelDijkstra extends javax.swing.JPanel {
         canvasPanel.setLayout(canvasPanelLayout);
         canvasPanelLayout.setHorizontalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 885, Short.MAX_VALUE)
         );
         canvasPanelLayout.setVerticalGroup(
             canvasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,16 +407,14 @@ public class PanelDijkstra extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1157, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(dijkstraLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(canvasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dijkstraLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(canvasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
+            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -599,15 +598,20 @@ public class PanelDijkstra extends javax.swing.JPanel {
                     canvasPanel.getModel().addElement(node);
                 }
                 for (int i = 0; i < lines.size(); i++) {
-                    int counter = -1;
+                    int counter = 0;
+                    String accumulator = "";
                     for (int j = 0; j < lines.get(i).length(); j++) {
-                        if (lines.get(i).charAt(j)!=',') {
-                            counter++;
-                        }
-                        if (lines.get(i).charAt(j)!='0' && lines.get(i).charAt(j)!=',' && counter!=-1) {
-                            int distance = Integer.parseInt("" + lines.get(i).charAt(j));
-                            canvasPanel.getGraph().makeConnection(canvasPanel.getGraph().getNode(i),
+                        if (lines.get(i).charAt(j)==',') {
+                            int distance = Integer.parseInt(accumulator);
+                            if (distance!=0) {
+                                canvasPanel.getGraph().makeConnection(canvasPanel.getGraph().getNode(i),
                                     canvasPanel.getGraph().getNode(counter), distance);
+                            }
+                            counter++;
+                            accumulator = "";
+                        }
+                        if (lines.get(i).charAt(j)!=',' && lines.get(i).charAt(j)!=' ') {
+                            accumulator += lines.get(i).charAt(j);
                         }
                     }
                 }
