@@ -213,7 +213,6 @@ public abstract class Nodo implements Serializable{
     public void addNextNode(Nodo nextNode) {
         if(this.nextNode.indexOf(nextNode) < 0){
             this.nextNode.add(nextNode);
-            System.out.println("Agregado");
         }
     }
     

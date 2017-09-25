@@ -8,8 +8,7 @@ public class Bicoloreable {
         ArrayList visited = new ArrayList();
         
         for (int i = 0; i < graph.getSize(); i++) {
-            graph.setList(new Color[graph.getSize()]);
-            boolean isNotBicolorable = R_Prof(graph, i, visited, (Color[])graph.getList(), true);
+            boolean isNotBicolorable = R_Prof(graph, i, visited, new Color[graph.getSize()], true);
             if(isNotBicolorable){
                 return false;
             }
@@ -43,10 +42,6 @@ public class Bicoloreable {
                 continue;
            
             if(graph.getMatrix(i, next) > 0){
-                System.out.println("[" + i + ", " + next + "]"  
-                        + graph.getMatrix(i, next) + ", use: " + color + ";" + " sends: " + !color);
-                //System.out.println(Arrays.toString(colors));
-                System.out.println();
                 if(R_Prof(graph, next, visited, colors, !color))
                     return true;
             }

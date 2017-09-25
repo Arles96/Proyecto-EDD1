@@ -191,15 +191,24 @@ public class CanvasPanel extends javax.swing.JPanel {
             //Draw Lines
             if(!nodo.getNextNode().isEmpty()){
                 for (Nodo nodo2 : nodo.getNextNode()) {
-                    double val = Math.pow(Math.pow(nodo.getCenterPoint().x - nodo2.getCenterPoint().x, 2) 
-                            + Math.pow(nodo.getCenterPoint().y - nodo2.getCenterPoint().y, 2), 0.5);
-                    
-                    g.drawLine(nodo.getCenterPoint().x, nodo.getCenterPoint().y, 
-                       nodo2.getCenterPoint().x, nodo2.getCenterPoint().y);
-                    
-                    g.drawString(String.valueOf((int)(val)), 
-                            (nodo.getCenterPoint().x + nodo2.getCenterPoint().x)/2,
-                            (nodo.getCenterPoint().y + nodo2.getCenterPoint().y)/2);
+                    if(!(nodo2 instanceof Terminal)){
+                        double val = Math.pow(Math.pow(nodo.getCenterPoint().x - nodo2.getCenterPoint().x, 2) 
+                                + Math.pow(nodo.getCenterPoint().y - nodo2.getCenterPoint().y, 2), 0.5);
+
+                        g.drawLine(nodo.getCenterPoint().x, nodo.getCenterPoint().y, 
+                           nodo2.getCenterPoint().x, nodo2.getCenterPoint().y);
+
+                        if(gDraw != null){
+                            val = gDraw.getMatrix(diagrama.indexOf(nodo), nodo.getNextNode().indexOf(nodo2));
+                            g.drawString(String.valueOf((int)(val)), 
+                                    (nodo.getCenterPoint().x + nodo2.getCenterPoint().x)/2,
+                                    (nodo.getCenterPoint().y + nodo2.getCenterPoint().y)/2);
+                        }else{
+                            g.drawString(String.valueOf((int)(val)),
+                                    (nodo.getCenterPoint().x + nodo2.getCenterPoint().x)/2,
+                                    (nodo.getCenterPoint().y + nodo2.getCenterPoint().y)/2);
+                        }
+                    }
                 }
             }
             
@@ -239,6 +248,27 @@ public class CanvasPanel extends javax.swing.JPanel {
         }
     }
 
+    public void drawGraph(Graph graph, Color color){
+        for (int i = 0; i < graph.getSize(); i++) {
+            Nodo newNode = new Proceso(String.valueOf(i), this.getWidth()/2, this.getHeight()/2, color);
+            this.addNode(newNode);
+            for (int j = 0; j < graph.getSize(); j++) {
+                this.diagrama.get(i).addNextNode(new Terminal());
+            }
+            System.out.println(this.diagrama.get(i).getNextNode().size());
+        }
+        
+        for (int i = 0; i < graph.getSize(); i++) {
+            for (int j = 0; j < graph.getSize(); j++) {
+                if(graph.getMatrix(i, j) > 0 && graph.getMatrix(i, j) < 5000){
+                    diagrama.get(i).setNextNode(diagrama.get(j), j);
+                }
+            }
+        }
+        gDraw = graph;
+        repaint();
+    }
+    
     public String getChartName() {
         return chartName;
     }
@@ -249,6 +279,7 @@ public class CanvasPanel extends javax.swing.JPanel {
     
     public void clean(){
         diagrama = new ArrayList();
+        gDraw = null;
         repaint();
     }
     /*public int addNode(Nodo node) throws myException {
@@ -430,6 +461,7 @@ public class CanvasPanel extends javax.swing.JPanel {
     //Uso externo
     private ArrayList<Nodo> diagrama;
     private String chartName;
+    public Graph gDraw = null;
 
     //Uso interno
     private boolean click;

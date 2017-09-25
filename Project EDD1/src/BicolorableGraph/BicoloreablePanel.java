@@ -7,9 +7,14 @@ package BicolorableGraph;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -48,6 +53,7 @@ public class BicoloreablePanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         panelNodos = new javax.swing.JPanel();
         toggTerminal = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -213,6 +219,13 @@ public class BicoloreablePanel extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setText("Cargar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelNodos1Layout = new javax.swing.GroupLayout(panelNodos1);
         panelNodos1.setLayout(panelNodos1Layout);
         panelNodos1Layout.setHorizontalGroup(
@@ -220,26 +233,30 @@ public class BicoloreablePanel extends javax.swing.JPanel {
             .addGroup(panelNodos1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelNodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(42, 42, 42)
+                .addGroup(panelNodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelNodos1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(42, 42, 42)
                         .addComponent(jButton3)
                         .addGap(46, 46, 46)
-                        .addComponent(jButton4)))
+                        .addComponent(jButton4))
+                    .addComponent(jButton5))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         panelNodos1Layout.setVerticalGroup(
             panelNodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNodos1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addGroup(panelNodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton5))
                 .addGap(18, 18, 18)
                 .addGroup(panelNodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         panelNodos.setBackground(new java.awt.Color(204, 204, 255));
@@ -266,13 +283,13 @@ public class BicoloreablePanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelColores, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelColores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelNodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelNodos1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+            .addComponent(panelNodos1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
         );
 
@@ -288,11 +305,11 @@ public class BicoloreablePanel extends javax.swing.JPanel {
         canvas.setLayout(canvasLayout);
         canvasLayout.setHorizontalGroup(
             canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGap(0, 861, Short.MAX_VALUE)
         );
         canvasLayout.setVerticalGroup(
             canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
+            .addGap(0, 305, Short.MAX_VALUE)
         );
 
         add(canvas);
@@ -351,6 +368,7 @@ public class BicoloreablePanel extends javax.swing.JPanel {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         canvas.clean();
+        this.jButton5.setEnabled(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void canvasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_canvasMouseClicked
@@ -363,26 +381,82 @@ public class BicoloreablePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_canvasMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        Graph graph = CanvasToGraph(false);
+        Graph graph = canvas.gDraw;
+        if(canvas.gDraw == null)
+            graph = CanvasToGraph(true);
         
         System.out.println(graph);
-        JOptionPane.showMessageDialog(this, (Bicoloreable.isBicoloreable(graph)));
+        JOptionPane.showMessageDialog(this, (Bicoloreable.isBicoloreable(graph)?"Es bicoloreable":"No es bicoloreable"));
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        Graph graph = CanvasToGraph(true);
+        Graph graph = canvas.gDraw;
+        if(canvas.gDraw == null)
+            graph = CanvasToGraph(true);
+            
         
         outText.setText("");
         printTree(Minimal.Kruskal(graph), "");
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        Graph graph = CanvasToGraph(true);
+        Graph graph = canvas.gDraw;
+        if(canvas.gDraw == null)
+            graph = CanvasToGraph(true);
         
         outText.setText("");
         printTree(Minimal.Prim(graph), "");
     }//GEN-LAST:event_jButton4MouseClicked
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        File file = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        ArrayList<String> listGraph = new ArrayList();
+
+        try {
+            JFileChooser jfc = new JFileChooser();
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de Texto", "txt");
+            jfc.setFileFilter(filtro);
+            int seleccion = jfc.showOpenDialog(this);
+            if(seleccion == JFileChooser.APPROVE_OPTION){
+                file = jfc.getSelectedFile();
+                fr = new FileReader(file);
+                br = new BufferedReader(fr);
+                String linea;
+                while((linea = br.readLine()) != null){
+                    listGraph.add(linea);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                br.close();
+                fr.close();
+            } catch (Exception e) {
+            }
+        }
+
+        Graph graph = new Graph(listGraph.size() ,false);
+
+        for (int i = 0; i < listGraph.size(); i++) {
+            String[] con = listGraph.get(i).split(",");
+            for (int j = 0; j < con.length; j++) {
+                graph.setNodeConection(i, j, Integer.valueOf(con[j]));
+            }
+        }
+
+        canvas.gDraw = graph;
+        GraphToCanvas(graph);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    public void GraphToCanvas(Graph graph){
+        canvas.drawGraph(graph, getColorSelection());
+        this.jButton5.setEnabled(false);
+    }
+    
     public Graph CanvasToGraph(boolean inf){
         Graph graph = new Graph(canvas.getDiagrama().size(), inf);
         ArrayList<Nodo> nodos = canvas.getDiagrama();
@@ -452,6 +526,7 @@ public class BicoloreablePanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea outText;
