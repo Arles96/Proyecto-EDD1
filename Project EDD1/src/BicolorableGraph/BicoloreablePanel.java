@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -37,6 +39,7 @@ public class BicoloreablePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        file_c = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         panelColores = new javax.swing.JPanel();
         toggleColor1 = new javax.swing.JToggleButton();
@@ -54,6 +57,7 @@ public class BicoloreablePanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         panelNodos = new javax.swing.JPanel();
         toggTerminal = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -226,6 +230,18 @@ public class BicoloreablePanel extends javax.swing.JPanel {
             }
         });
 
+        jButton6.setText("Floyd");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelNodos1Layout = new javax.swing.GroupLayout(panelNodos1);
         panelNodos1.setLayout(panelNodos1Layout);
         panelNodos1Layout.setHorizontalGroup(
@@ -240,9 +256,13 @@ public class BicoloreablePanel extends javax.swing.JPanel {
                     .addGroup(panelNodos1Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(46, 46, 46)
-                        .addComponent(jButton4))
-                    .addComponent(jButton5))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(jButton4)
+                        .addContainerGap(34, Short.MAX_VALUE))
+                    .addGroup(panelNodos1Layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6)
+                        .addGap(23, 23, 23))))
         );
         panelNodos1Layout.setVerticalGroup(
             panelNodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +270,8 @@ public class BicoloreablePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelNodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton5))
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
                 .addGap(18, 18, 18)
                 .addGroup(panelNodos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -289,7 +310,7 @@ public class BicoloreablePanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelColores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelNodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelNodos1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+            .addComponent(panelNodos1, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
         );
 
@@ -360,7 +381,7 @@ public class BicoloreablePanel extends javax.swing.JPanel {
             canvas.applyToSelected(getColorSelection());
         } else if (evt.isMetaDown()) {
             toggleCustom.setBackground(
-                JColorChooser.showDialog(this, "Elija el color", toggleCustom.getBackground()));
+                    JColorChooser.showDialog(this, "Elija el color", toggleCustom.getBackground()));
         }
 
         canvas.repaint();
@@ -376,34 +397,36 @@ public class BicoloreablePanel extends javax.swing.JPanel {
             Nodo newNode = new Proceso(String.valueOf(canvas.getDiagrama().size()), evt.getX(), evt.getY(), getColorSelection());
             canvas.addNode(newNode);
         }
-        
+
         canvas.repaint();
     }//GEN-LAST:event_canvasMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         Graph graph = canvas.gDraw;
-        if(canvas.gDraw == null)
+        if (canvas.gDraw == null) {
             graph = CanvasToGraph(true);
-        
+        }
+
         System.out.println(graph);
-        JOptionPane.showMessageDialog(this, (Bicoloreable.isBicoloreable(graph)?"Es bicoloreable":"No es bicoloreable"));
+        JOptionPane.showMessageDialog(this, (Bicoloreable.isBicoloreable(graph) ? "Es bicoloreable" : "No es bicoloreable"));
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         Graph graph = canvas.gDraw;
-        if(canvas.gDraw == null)
+        if (canvas.gDraw == null) {
             graph = CanvasToGraph(true);
-            
-        
+        }
+
         outText.setText("");
         printTree(Minimal.Kruskal(graph), "");
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         Graph graph = canvas.gDraw;
-        if(canvas.gDraw == null)
+        if (canvas.gDraw == null) {
             graph = CanvasToGraph(true);
-        
+        }
+
         outText.setText("");
         printTree(Minimal.Prim(graph), "");
     }//GEN-LAST:event_jButton4MouseClicked
@@ -420,18 +443,18 @@ public class BicoloreablePanel extends javax.swing.JPanel {
             FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de Texto", "txt");
             jfc.setFileFilter(filtro);
             int seleccion = jfc.showOpenDialog(this);
-            if(seleccion == JFileChooser.APPROVE_OPTION){
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
                 file = jfc.getSelectedFile();
                 fr = new FileReader(file);
                 br = new BufferedReader(fr);
                 String linea;
-                while((linea = br.readLine()) != null){
+                while ((linea = br.readLine()) != null) {
                     listGraph.add(linea);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 br.close();
                 fr.close();
@@ -439,7 +462,7 @@ public class BicoloreablePanel extends javax.swing.JPanel {
             }
         }
 
-        Graph graph = new Graph(listGraph.size() ,false);
+        Graph graph = new Graph(listGraph.size(), false);
 
         for (int i = 0; i < listGraph.size(); i++) {
             String[] con = listGraph.get(i).split(",");
@@ -452,41 +475,136 @@ public class BicoloreablePanel extends javax.swing.JPanel {
         GraphToCanvas(graph);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    public void GraphToCanvas(Graph graph){
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        try {
+            if (evt.isMetaDown()) {
+                File file;
+                file_c.showOpenDialog(null);
+                file = file_c.getSelectedFile();
+                //file = new File((file_c.getSelectedFile() + "").replace('\\', '/'));
+                //System.out.println(file);
+                String current;
+                ArrayList<String> pattern;
+                ArrayList<Floyd.Node> nodes;
+
+                pattern = new ArrayList();
+                nodes = new ArrayList();
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                while ((current = br.readLine()) != null) {
+                    pattern.add(current);
+                }
+                for (int i = 0; i < pattern.size(); i++) {
+                    String line = pattern.get(i);
+                    String[] temp = line.split(", ");
+                    nodes.add(new Floyd.Node(0, i + "", i, temp));
+                }
+
+                Floyd.Graph graph = new Floyd.Graph(nodes);
+                Floyd.Floyd floyd = new Floyd.Floyd(graph);
+
+                //Paint
+                canvas.clean();
+                Random r = new Random();
+                ArrayList<Nodo> nodos = new ArrayList();
+                ArrayList<ArrayList<Integer>> conections = new ArrayList();
+                ArrayList<Integer[]> ways = new ArrayList();
+                int X = r.nextInt(250), x = X, y = r.nextInt(500);
+                for (int i = 0; i < pattern.size(); i++) {
+                    conections.add(new ArrayList());
+                    x = X + (floyd.getWays()[0][i]) * 100;
+                    ways.add(new Integer[2]);
+                    ways.get(i)[0] = x;
+                    ways.get(i)[1] = y;
+                    Nodo newNode = new Proceso(String.valueOf(canvas.getDiagrama().size()), x, y, getColorSelection());
+                    nodos.add(newNode);
+                    canvas.addNode(newNode);
+                    canvas.repaint();
+                }
+                Floyd.Graph link = new Floyd.Graph(graph.getNodes());
+                link.fillCost();
+                for (int i = 0; i < pattern.size(); i++) {
+                    for (int j = 0; j < pattern.size(); j++) {
+                        if (i != j) {
+                            if (link.getCosts()[i][j] != 10000) {
+                                if (!conections.get(j).contains(i)) {
+                                    canvas.connect = true;
+                                    getMousePosition().setLocation(ways.get(i)[0], ways.get(i)[1]);
+                                    java.awt.event.MouseEvent temp = evt;
+                                    temp.translatePoint(ways.get(i)[0], ways.get(i)[1]);
+                                    canvas.sendingNode = nodos.get(j);
+                                    canvas.createClick(temp);
+                                    conections.get(i).add(j);
+                                }
+                            }
+                        }
+                    }
+                }
+                //System.out.println(Arrays.deepToString(link.getCosts()));
+                System.out.println(conections);
+                outText.setText("RUTAS\n");
+                //System.out.println(Arrays.deepToString(floyd.getWays()));
+                for (int i = 0; i < pattern.size(); i++) {
+                    outText.setText(outText.getText() + Arrays.toString(floyd.getWays()[i]) + "\n");
+                }
+                br.close();
+                fr.close();
+                //System.out.println(file);
+            } else {
+                Graph graph = CanvasToGraph(true);
+                f_graph = new Floyd.Graph();
+                f_graph.convert(graph, canvas.getDiagrama().size());
+                Floyd.Floyd floyd = new Floyd.Floyd(f_graph);
+                outText.setText("RUTAS\n");
+                for (int i = 0; i < canvas.getDiagrama().size(); i++) {
+                    outText.setText(outText.getText() + Arrays.toString(floyd.getWays()[i]) + "\n");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("...");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    public void GraphToCanvas(Graph graph) {
         canvas.drawGraph(graph, getColorSelection());
         this.jButton5.setEnabled(false);
     }
-    
-    public Graph CanvasToGraph(boolean inf){
+
+    public Graph CanvasToGraph(boolean inf) {
         Graph graph = new Graph(canvas.getDiagrama().size(), inf);
         ArrayList<Nodo> nodos = canvas.getDiagrama();
-        
+
         for (Nodo nodo : nodos) {
-            if(!nodo.getNextNode().isEmpty()){
+            if (!nodo.getNextNode().isEmpty()) {
                 int Start = nodos.indexOf(nodo);
                 for (Nodo nodo2 : nodo.getNextNode()) {
-                    double val = Math.pow(Math.pow(nodo.getCenterPoint().x - nodo2.getCenterPoint().x, 2) 
+                    double val = Math.pow(Math.pow(nodo.getCenterPoint().x - nodo2.getCenterPoint().x, 2)
                             + Math.pow(nodo.getCenterPoint().y - nodo2.getCenterPoint().y, 2), 0.5);
-                    
+
                     int End = nodos.indexOf(nodo.getNextNode(nodo.getNextNode().indexOf(nodo2)));
-                    graph.setNodeConection(Start, End, (int)val);
+                    graph.setNodeConection(Start, End, (int) val);
                 }
             }
             graph.setNode(nodo.getText(), nodos.indexOf(nodo));
         }
-        
+
         return graph;
     }
-    
-    public void printTree(Tree tree, String s){
+
+    public void printTree(Tree tree, String s) {
         outText.setText(outText.getText() + s + tree.getLabel() + " value: " + tree.getValue() + "\n");
-        
-        if(tree.hasChildren());
+
+        if (tree.hasChildren());
         for (int i = 0; i < tree.getChildren().size(); i++) {
             printTree(tree.getChildren().get(i), s + "\t");
         }
     }
-    
+
     public Color getColorSelection() {
         if (toggleColor1.isSelected()) {
             return toggleColor1.getBackground();
@@ -518,15 +636,17 @@ public class BicoloreablePanel extends javax.swing.JPanel {
         }
         return Color.WHITE;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private BicolorableGraph.CanvasPanel canvas;
+    private javax.swing.JFileChooser file_c;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea outText;
@@ -544,4 +664,7 @@ public class BicoloreablePanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton toggleColor8;
     private javax.swing.JToggleButton toggleCustom;
     // End of variables declaration//GEN-END:variables
+
+    private BicolorableGraph.CanvasPanel Original_canvas;
+    private Floyd.Graph f_graph;
 }

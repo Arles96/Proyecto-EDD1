@@ -457,22 +457,24 @@ public class CanvasPanel extends javax.swing.JPanel {
     private javax.swing.JMenuItem popItemTextNode;
     private javax.swing.JPopupMenu popupNodes;
     // End of variables declaration//GEN-END:variables
-
+public void createClick(java.awt.event.MouseEvent evt) {
+        formMouseClicked(evt);
+    }
     //Uso externo
-    private ArrayList<Nodo> diagrama;
-    private String chartName;
+    public ArrayList<Nodo> diagrama;
+    public String chartName;
     public Graph gDraw = null;
 
     //Uso interno
-    private boolean click;
-    private int offX;
-    private int offY;
-    private Nodo nodeCollision;
-    private Nodo sendingNode;
-    private boolean connect;
+    public boolean click;
+    public int offX;
+    public int offY;
+    public Nodo nodeCollision;
+    public Nodo sendingNode;
+    public boolean connect;
 
     //Constantes
     public final int DESIGN_MODE = 0;
     public final int LINES_MODE = 1;
-    private final Color SELECTION_COLOR = new Color(51, 153, 255);
+    public final Color SELECTION_COLOR = new Color(51, 153, 255);
 }
