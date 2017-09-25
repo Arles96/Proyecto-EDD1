@@ -169,7 +169,7 @@ public class GraphDijkstra extends AbstractGraph {
                         }
                     }
                 }else {
-                    if (i>1 && node.getVertex()!=j) {
+                    if (i>1 && node.getVertex()-1!=j) {
                         if (solution[i-1].getConnection(j)!=null) {
                             list[j] = solution[i-1].getConnection(j);
                             int accumulator = solution[i-1].getAccumulator() + solution[i-1].getDistance(j);
@@ -226,6 +226,11 @@ public class GraphDijkstra extends AbstractGraph {
             }
         }
         return null;
+    }
+    
+    public boolean existConnection(Node node1, Node node2){
+        return !(node1.getConnection(node2.getVertex()-1)==null && 
+                node2.getConnection(node1.getVertex()-1)==null);
     }
     
 }

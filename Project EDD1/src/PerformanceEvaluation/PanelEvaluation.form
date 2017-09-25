@@ -43,10 +43,10 @@
               <Component id="tittlePanelLabel" min="-2" pref="74" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,7 +78,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="tittleLabel" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jScrollPane2" min="-2" pref="178" max="-2" attributes="0"/>
                                   <Component id="addEmployeeLabel" min="-2" max="-2" attributes="0"/>
@@ -107,16 +107,13 @@
                                           </Group>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="openFileButton" max="32767" attributes="0"/>
-                                          <Component id="saveFileButton" pref="131" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="openFileButton" min="-2" pref="131" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
                                       <Component id="addEmployee" min="-2" pref="243" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="214" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="284" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -149,31 +146,26 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="saveFileButton" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="addTextFieldId" min="-2" pref="37" max="-2" attributes="0"/>
-                                          <Component id="addLabelId" min="-2" pref="37" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="addLabelArea" min="-2" pref="37" max="-2" attributes="0"/>
-                                          <Component id="addTextFieldArea" min="-2" pref="37" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="addTextFieldValue" min="-2" pref="39" max="-2" attributes="0"/>
-                                          <Component id="addLabelValue" min="-2" pref="39" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="addTextFieldId" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="addLabelId" min="-2" pref="37" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="addLabelArea" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="addTextFieldArea" min="-2" pref="37" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="addTextFieldValue" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="addLabelValue" min="-2" pref="39" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
                               <Component id="addEmployee" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane2" min="-2" pref="339" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="97" max="32767" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -272,11 +264,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openFileButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="saveFileButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Guadar Archivo"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="addEmployeeLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Seleccione un empleado"/>
@@ -369,7 +356,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="48" max="32767" attributes="0"/>
+                              <EmptySpace pref="12" max="32767" attributes="0"/>
                               <Component id="jScrollPane3" min="-2" pref="343" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="removeButton" min="-2" pref="44" max="-2" attributes="0"/>
@@ -381,7 +368,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                           <Component id="addLabelName1" min="-2" pref="37" max="-2" attributes="0"/>
-                          <EmptySpace pref="392" max="32767" attributes="0"/>
+                          <EmptySpace pref="355" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

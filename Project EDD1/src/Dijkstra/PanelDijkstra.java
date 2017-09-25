@@ -24,7 +24,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class PanelDijkstra extends javax.swing.JPanel {
     
-    // TODO: "pintar los nodos de dijkstra"
+    // TODO: corregir en la conexion de un mismo nodo
     //atribute
     private File file;
     
@@ -76,7 +76,11 @@ public class PanelDijkstra extends javax.swing.JPanel {
         FileWriter fw;
         BufferedWriter bw;
          try {
-            fw = new FileWriter(file+".txt");
+            if (file==null) {
+              fw = new FileWriter(file+".txt");  
+            }else {
+               fw = new FileWriter(file);
+            }
             bw = new BufferedWriter(fw);
             for (int i = 0; i < canvasPanel.getGraph().getCounter(); i++) {
                 if (canvasPanel.getGraph().getNode(i)!=null) {
@@ -512,6 +516,10 @@ public class PanelDijkstra extends javax.swing.JPanel {
                 }else {
                     Node node1 = (Node)canvasPanel.getModel().get(nodeList1.getSelectedIndex());
                     Node node2 = (Node)canvasPanel.getModel().get(nodeList2.getSelectedIndex());
+                    if (canvasPanel.getGraph().existConnection(node1, node2)) {
+                        JOptionPane.showMessageDialog(this, "Ya existe una conexión.");
+                        return;
+                    }
                     canvasPanel.getGraph().makeConnection(node1, node2, distance);
                     closedJDialog(jDialogConnection);
                     canvasPanel.repaint();
