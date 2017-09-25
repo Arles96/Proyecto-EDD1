@@ -520,7 +520,8 @@ public class PanelEvaluation extends javax.swing.JPanel {
             tree = new Tree(new Employee(value, name, area, id));
             model.addElement(tree.getRoot());
             addEmployeeLabel.setVisible(true);
-        }else {
+        }
+        if (tree!=null && tree.getRoot()!=null){
             if (addEmployeeList.getSelectedIndex()>-1) {
                 int number = addEmployeeList.getSelectedIndex();
                 Employee boss = (Employee) model.get(number);
